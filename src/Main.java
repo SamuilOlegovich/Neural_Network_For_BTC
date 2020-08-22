@@ -13,21 +13,23 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Запускаем все что связано с путями, файлами, чнением и настройками.
         FilesAndPathCreator filesAndPathCreator = new FilesAndPathCreator();
-        Gasket.setFilesAndPathCreator(filesAndPathCreator);
         ExecutorCommandos executorCommandos = new ExecutorCommandos();
         ReadAndWriteSetting readAndWriteSetting = new ReadAndWriteSetting(executorCommandos);
         ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting = new ReadAndWriteNeuralNetworkSetting();
 
+        // если нужно обучение, запускаем вначале обучение, иначе запускаем востановление параметров NN
+        if (Gasket.isTurnOnTurnOffLearning()) {
+            DownloadedData downloadedData = new DownloadedData();
+            ReadAndConvert readAndConvert = new ReadAndConvert();
+//            TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
+//            teacherNeuralNetwork.startLearning();
+        } else {
+            CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
+        }
 
-
-
-
-
-        DownloadedData downloadedData = new DownloadedData();
-        Gasket.setDownloadedData(downloadedData);
-        TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
-        teacherNeuralNetwork.startLearning();
-        Gasket.setTeacherNeuralNetwork(teacherNeuralNetwork);
+        // запускаем визуальную часть
+//        FormDigits f = new FormDigits(Gasket.getNeuralNetwork());
+//        new Thread(f).start();
     }
 
 }

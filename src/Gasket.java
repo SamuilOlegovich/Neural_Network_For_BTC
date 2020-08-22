@@ -1,17 +1,25 @@
 public class Gasket {
-    private static boolean whetherOrNotShowLearningProcess = false; // показывать или нет процесс обучения
+    private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private static TeacherNeuralNetwork teacherNeuralNetwork;
     private static FilesAndPathCreator filesAndPathCreator;
     private static ExecutorCommandos executorCommandos;
+    private static DownloadedData downloadedData;
+    private static NeuralNetwork neuralNetwork;
+
+
+    private static boolean whetherOrNotShowLearningProcess = false; // показывать или нет процесс обучения
+    private static boolean turnOnTurnOffLearning = true;    // включить выключить процесс обучения
     private static int numberOfTrainingCycles = 1000;
     private static int numberOfInputNeurons = 1521;
     private static int numberOfOutputNeurons = 3;
-    private static DownloadedData downloadedData;
-    private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
-    private static NeuralNetwork neuralNetwork;
     private static int dateDifference = -3;         // разница в часовом поясе
 
+
     private static final String SETTING_NOW = " --- SETTING_NOW --- ";
+    private static final String LEARNING_PROCESS_HAS_STARTED_NN = " ----- СТАРТОВАЛ процесс обучения NN";
+    private static final String THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING =
+            " ----- ПРОЦЕСС ОБУЧЕНИЯ NN ОКОНЧЕН - СОХРАНЯЮСЬ";
+
 
 
 
@@ -21,6 +29,18 @@ public class Gasket {
 
     public static String getSettingNow() {
         return SETTING_NOW;
+    }
+
+    public static String getLearningProcessHasStarted() {
+        return LEARNING_PROCESS_HAS_STARTED_NN;
+    }
+
+    public static boolean isTurnOnTurnOffLearning() {
+        return turnOnTurnOffLearning;
+    }
+
+    public static void setTurnOnTurnOffLearning(boolean turnOnTurnOffLearning) {
+        Gasket.turnOnTurnOffLearning = turnOnTurnOffLearning;
     }
 
     public static ReadAndWriteNeuralNetworkSetting getReadAndWriteNeuralNetworkSetting() {

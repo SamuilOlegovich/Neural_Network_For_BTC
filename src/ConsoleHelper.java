@@ -30,10 +30,11 @@ public class ConsoleHelper {
                 + "numberOfOutputNeurons === " + Gasket.getNumberOfOutputNeurons()
                 + " ----- количество выходных нейронов НН\n"
                 + "numberOfInputNeurons === " + Gasket.getNumberOfInputNeurons()
-                + " ----- количество входных нейронов (стоит соблюдать кратность параметру - всегда квадрат - количество ячеек в екм кратно 13)\n"
+                + " ----- количество входных нейронов (стоит соблюдать кратность параметру - всегда квадрат " +
+                "- количество ячеек матрицы кратно 13)\n"
                 + "\n"
                 + "\n"
-                + "dateDifference === " + Gasket.getTeacherNeuralNetwork()
+                + "dateDifference === " + Gasket.getDateDifference()
                 + " ----- на сколько время в терминале отстает или опережает местное\n"
                 + "\n";
     }

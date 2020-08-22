@@ -105,8 +105,10 @@ public class NeuralNetwork {
         for (Layer l : layers) {
             try {
                 arrayList.add(objectMapper.writeValueAsString(l));
+                arrayList.add(Enums.NEXT.toString());
             } catch (JsonProcessingException ex) { }
         }
+        arrayList.remove(arrayList.size() - 1);
         return arrayList;
     }
 }

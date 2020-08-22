@@ -1,19 +1,40 @@
 import java.util.ArrayList;
 
 public class ReadAndWriteNeuralNetworkSetting {
-    private String path;
+    private String pathSavedWeights;
+    private String pathWeights;
 
     public ReadAndWriteNeuralNetworkSetting() {
-        this.path = Gasket.getFilesAndPathCreator().getPathWeights();
+        this.pathSavedWeights = Gasket.getFilesAndPathCreator().getPathSavedWeights();
+        this.pathWeights = Gasket.getFilesAndPathCreator().getPathWeights();
         Gasket.setReadAndWriteNeuralNetworkSetting(this);
         readFileWeights();
     }
 
+
+
+
+    // считываем настройки NN
     private void readFileWeights() {
 
     }
 
-    protected void saveAllNeuralNetworkData(ArrayList<String> in) {
 
+    // сохраняем найденые веса после обучения NN
+    protected void saveAllNeuralNetworkData(ArrayList<String> in) {
+        ArrayList<String> arrayList = new ArrayList<>(in);
+        StringBuilder stringBuilder = new StringBuilder(Enums.START.toString());
+
+        for (String s : arrayList) {
+            stringBuilder.append(s);
+        }
+
+        stringBuilder.append(Enums.END.toString()).append("\n\n");
+
+        try {
+            WriterAndReadFile.writerFile(stringBuilder.toString(), pathSavedWeights, false);
+        } catch (Exception e) {
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.WEIGHTS_NOT_SAVED));
+        }
     }
 }

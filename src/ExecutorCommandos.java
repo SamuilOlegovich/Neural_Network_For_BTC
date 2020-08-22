@@ -38,31 +38,31 @@ public class ExecutorCommandos {
                     Gasket.setWhetherOrNotShowLearningProcess(strings[1].equalsIgnoreCase("true"));
                     ConsoleHelper.writeMessage("whetherOrNotShowLearningProcess === "
                             + Gasket.isWhetherOrNotShowLearningProcess()
-                            + "\n");
+                    );
                     break;
                 case "numberOfTrainingCycles" :
                     Gasket.setNumberOfTrainingCycles(Integer.parseInt(strings[1]));
                     ConsoleHelper.writeMessage("numberOfTrainingCycles === "
                             + Gasket.getNumberOfTrainingCycles()
-                            + "\n");
+                    );
                     break;
                 case "numberOfOutputNeurons" :
                     Gasket.setNumberOfOutputNeurons(Integer.parseInt(strings[1]));
                     ConsoleHelper.writeMessage("numberOfOutputNeurons === "
                             + Gasket.getNumberOfOutputNeurons()
-                            + "\n");
+                    );
                     break;
                 case "numberOfInputNeurons" :
                     Gasket.setNumberOfInputNeurons(Integer.parseInt(strings[1]));
                     ConsoleHelper.writeMessage("numberOfInputNeurons === "
                             + Gasket.getNumberOfInputNeurons()
-                            + "\n");
+                    );
                     break;
                 case "dateDifference" :
                     Gasket.setDateDifference(Integer.parseInt(strings[1]));
                     ConsoleHelper.writeMessage("dateDifference === "
                             + Gasket.getDateDifference()
-                            + "\n");
+                    );
                     break;
                 case "SETTINGS" :
                     // SETTINGS=RESTART программа перезапустит настройки не отключаясь

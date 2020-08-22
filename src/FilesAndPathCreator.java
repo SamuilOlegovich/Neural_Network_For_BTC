@@ -20,8 +20,8 @@ public class FilesAndPathCreator {
     private String pathPatternsForUser;
     private String pathPatternsDelete;
     private String pathPatternsIIPro;
-    private String pathPatternsUser;
 
+    private String pathSavedWeights;
     private String pathSettings;
     private String pathWeights;
     private String pathHistory;
@@ -141,9 +141,9 @@ public class FilesAndPathCreator {
                 pathPatternsDelete = finish + "iiPatterns\\iiTemporaryDelete.txt";
                 pathPatternsForUser = finish + "uPatterns\\iiPatternsForUser.txt";
                 pathPatternsIIPro = finish + "iiProPatterns\\iiProPatterns.txt";
-                pathPatternsUser = finish + "iiProPatterns\\iiProPatterns.txt";
-                pathPatternsUser = finish + "uPatterns\\uPatterns.txt";
+                pathSavedWeights = finish + "iiProPatterns\\iiProPatterns.txt";
 
+                pathSavedWeights = finish + "Weights\\SavedWeights.txt";
                 pathSettings = finish + "Settings\\Settings.txt";
                 pathHistory = finish + "History\\History.txt";
                 pathWeights = finish + "Weights\\Weights.txt";
@@ -244,8 +244,8 @@ public class FilesAndPathCreator {
                 pathPatternsDelete = finish + "iiPatterns/iiTemporaryDelete.txt";
                 pathPatternsIIPro = finish + "iiProPatterns/iiProPatterns.txt";
                 pathPatternsForUser = finish + "uPatterns/iiPatternsFor.txt";
-                pathPatternsUser = finish + "uPatterns/uPatterns.txt";
 
+                pathSavedWeights = finish + "Weights/SavedWeights.txt";
                 pathHistory = finish + "History/History.txt";
                 pathSettings = finish + "Settings/Settings.txt";
                 pathWeights = finish + "Weights/Weights.txt";
@@ -267,7 +267,7 @@ public class FilesAndPathCreator {
             pathPatternsTemporary = string + "Logs/Patterns/TemporaryPatterns.txt";
             pathPatternsIIPro = string + "Logs/PatternsUser/iiProPatterns.txt";
             pathPatternsDelete = string + "Logs/Patterns/TemporaryDelete.txt";
-            pathPatternsUser = string + "Logs/PatternsUser/uPatterns.txt";
+            pathSavedWeights = string + "Logs/PatternsUser/uPatterns.txt";
 
 
             pathLogs = string + "Logs/Log/" + DatesTimes.getDateLogs() + "===Log.txt";
@@ -316,7 +316,7 @@ public class FilesAndPathCreator {
             pathPatternsIIPro = pathPatternsIIPro
                     .replaceFirst("/", "").replaceAll("/", "\\\\");
 
-            pathPatternsUser = pathPatternsUser
+            pathSavedWeights = pathSavedWeights
                     .replaceFirst("/", "").replaceAll("/", "\\\\");
 
             pathSettings = pathSettings
@@ -345,10 +345,10 @@ public class FilesAndPathCreator {
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsForUser);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsDelete);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsIIPro);
-        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsUser);
 
-        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathWeights);
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathSavedWeights);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathSettings);
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathWeights);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathHistory);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathLogs);
     }
@@ -404,8 +404,8 @@ public class FilesAndPathCreator {
             createdFileDeletePatterns();
         }
 
-        if (!Files.exists(Paths.get(pathPatternsUser))) {
-            createdFilePatternsUser();
+        if (!Files.exists(Paths.get(pathSavedWeights))) {
+            createdFileSavedWeights();
         }
 
         if (!Files.exists(Paths.get(pathPatternsIIPro))) {
@@ -469,10 +469,10 @@ public class FilesAndPathCreator {
         try {
             boolean newFile = file.createNewFile();
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Новый файл Весов успешно создан.");
+                    + "Новый файл Weights успешно создан.");
         } catch (IOException ex) {
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Не удалось создать файл Весов.");
+                    + "Не удалось создать файл Weights.");
         }
     }
 
@@ -483,24 +483,24 @@ public class FilesAndPathCreator {
         try {
             boolean newFile = file.createNewFile();
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Новый файл Настроек успешно создан.");
+                    + "Новый файл Settings успешно создан.");
         } catch (IOException ex) {
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Не удалось создать файл Настроек.");
+                    + "Не удалось Settings файл Настроек.");
         }
     }
 
 
 
-    private void createdFilePatternsUser() {
-        File file = new File(pathPatternsUser);
+    private void createdFileSavedWeights() {
+        File file = new File(pathSavedWeights);
         try {
             boolean newFile = file.createNewFile();
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Новый файл для User Паттернов успешно создан.");
+                    + "Новый файл для SavedWeights успешно создан.");
         } catch (IOException ex) {
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Не удалось создать файл User Петтернов.");
+                    + "Не удалось создать файл SavedWeights.");
         }
     }
 
@@ -539,10 +539,10 @@ public class FilesAndPathCreator {
         try {
             boolean newFile = file.createNewFile();
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Новый файл для Истории успешно создан.");
+                    + "Новый файл для History успешно создан.");
         } catch (IOException ex) {
             ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
-                    + "Не удалось создать файл Истории.");
+                    + "Не удалось создать файл History.");
         }
     }
 
@@ -684,8 +684,8 @@ public class FilesAndPathCreator {
         return pathSettings;
     }
 
-    public String getPathPatternsUser() {
-        return pathPatternsUser;
+    public String getPathSavedWeights() {
+        return pathSavedWeights;
     }
 
     public String getPathHistory() {

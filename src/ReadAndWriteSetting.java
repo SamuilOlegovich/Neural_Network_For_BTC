@@ -33,7 +33,7 @@ public class ReadAndWriteSetting {
 
             for (String string : listSettings) {
                 if (string.equalsIgnoreCase(Enums.END.toString())) {
-                    ConsoleHelper.writeMessage("Настройки УСПЕШНО считаны.");
+                    ConsoleHelper.writeMessage(StringHelper.getString(Enums.SETTINGS_SUCCESSFULLY_READ));
                     return;
                 }
 

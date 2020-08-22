@@ -29,6 +29,9 @@ public class TeacherNeuralNetwork {
         this.sigmoid = x -> 1 / (1 + Math.exp(-x));
         this.dsigmoid = y -> y * (1 - y);
         this.nn = createNeuralNetwork();
+        Gasket.setTeacherNeuralNetwork(this);
+        Gasket.setNeuralNetwork(nn);
+        digits();
     }
 
 
@@ -64,6 +67,8 @@ public class TeacherNeuralNetwork {
 
 
     private void digits() {
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
+                + " ----- " + Enums.NN_LEARNING_PROCESS_STARTED.toString());
         for (int i = 1; i < epochs; i++) {
             int right = 0;
             double errorSum = 0;
@@ -101,6 +106,8 @@ public class TeacherNeuralNetwork {
                 ConsoleHelper.writeMessage("epoch: " + i + ". correct: " + right + ". error: " + errorSum);
             }
         }
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
+                + " ----- " + Enums.THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING.toString());
         keepTheNumberOfNeuronsInTheLayer();
     }
 
@@ -108,9 +115,11 @@ public class TeacherNeuralNetwork {
     private void keepTheNumberOfNeuronsInTheLayer() {
         ArrayList<String> arrayList = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
+
         try {
             arrayList.add(objectMapper.writeValueAsString(this));
         } catch (JsonProcessingException ex) { }
+        arrayList.add(Enums.NEXT.toString());
         arrayList.addAll(nn.saveBalanceData());
         Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList);
     }
