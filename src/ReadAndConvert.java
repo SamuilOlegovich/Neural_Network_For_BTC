@@ -2,13 +2,11 @@ import java.util.ArrayList;
 
 public class ReadAndConvert {
     private DownloadedData downloadedData;
-//    private ArrayList<String> outList;
     private String pathHistory;
 
     public ReadAndConvert() {
         this.pathHistory = Gasket.getFilesAndPathCreator().getPathHistory();
         this.downloadedData = Gasket.getDownloadedData();
-//        this.outList = new ArrayList<>();
         readFileHistory();
     }
 
@@ -30,18 +28,18 @@ public class ReadAndConvert {
             listHistory.clear();
         } catch (Exception e) {
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
+            ConsoleHelper.writeMessage(StringHelper.getString(e.getMessage()));
         }
     }
 
 
 
     private void convertHistory(ArrayList<String> in) {
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
         ArrayList<String> arrayList = new ArrayList<>(in);
-        StringBuilder stringBuilder = new StringBuilder(arrayList.get(0) + ";");
+        StringBuilder stringBuilder = new StringBuilder(arrayList.get(0));
         arrayList.remove(0);
 
-        for (String s : in) {
+        for (String s : arrayList) {
             double open = getData(Enums.OPEN, s);
             double high = getData(Enums.HIGH, s);
             double close = getData(Enums.CLOSE, s);
@@ -62,35 +60,66 @@ public class ReadAndConvert {
             double volumeOpenLow = volumePerPoint * openLow;                    // объем в опен лов
             double volumeOfWholeCandle = volume;                                // объем всей свечи
 
-            stringBuilder.append(candleBody).append(";").append(fromHighToLow).append(";").append(upperShadow)
-                    .append(";").append(lowerShadow).append(";").append(openHigh).append(";").append(openLow)
-                    .append(";").append(volumePerPoint).append(";").append(volumeInCandleBody).append(";")
-                    .append(volumeAtTopOfShadow).append(";").append(volumeAtLowOfShadow).append(";")
-                    .append(volumeOpenHigh).append(";").append(volumeOpenLow).append(";")
-                    .append(volumeOfWholeCandle);
+            stringBuilder.append(";").append(candleBody).append(";").append(fromHighToLow).append(";")
+                    .append(upperShadow).append(";").append(lowerShadow).append(";").append(openHigh).append(";")
+                    .append(openLow).append(";").append(volumePerPoint).append(";").append(volumeInCandleBody)
+                    .append(";").append(volumeAtTopOfShadow).append(";").append(volumeAtLowOfShadow)
+                    .append(";").append(volumeOpenHigh).append(";").append(volumeOpenLow)
+                    .append(";").append(volumeOfWholeCandle);
         }
-        arrayList.clear();
+        // наполняем входящий лист отконвертированными строками для обучения NN
         downloadedData.addDownloadedList(stringBuilder.toString());
     }
 
+
+
     // находим паттерны
     private void findPatterns(ArrayList<String> in) {
-        ArrayList<String> arrayList = new ArrayList<>(in);
-        ArrayList<String> arrayListOut = new ArrayList<>();
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
 
-        for (int a = 0; a < arrayList.size() - Gasket.getNumberOfInputNeurons()
-                / Gasket.getNumberOfIndicatorsForOneCandle(); a++) {
+        for (int a = 0; a < ((in.size() - Gasket.getNumberOfInputNeurons()
+                / Gasket.getNumberOfIndicatorsForOneCandle()) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
+            ArrayList<String> outList = new ArrayList<>();
+            int finish = 0;
 
+            for (int i = a; i < (a + (Gasket.getNumberOfInputNeurons()
+                    / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
+                outList.add(in.get(i));
+                finish = i;
+            }
 
+            double finishCloseSell = getData(Enums.CLOSE, in.get(finish)) - Gasket.getPriceChangeToFormHistoryPattern();
+            double finishCloseBuy = getData(Enums.CLOSE, in.get(finish)) + Gasket.getPriceChangeToFormHistoryPattern();
+            int sizeListOut = outList.size();
+            finish++;
 
+            for (int i = finish; i < finish + Gasket.getNumberOfCandlesToDetectMovement(); i++) {
+//
+                String s = in.get(i);
+                double close = getData(Enums.CLOSE, s);
+                double high = getData(Enums.HIGH, s);
+                double low = getData(Enums.LOW, s);
 
+                if (finishCloseBuy < close || finishCloseBuy < high) {
+                    outList.add(0, Enums.BUY.toString());
+                    break;
+                } else if (finishCloseSell > close || finishCloseSell > low) {
+                    outList.add(0, Enums.SELL.toString());
+                    break;
+                }
+            }
+
+            if (outList.size() == sizeListOut) {
+                outList.add(0, Enums.FLAT.toString());
+            }
+            // конвертируем паттерны и наполняем входящий лист строками для обучения NN
+            convertHistory(outList);
         }
-
-
-
-
-
-        convertHistory(arrayListOut);
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_CONVERSION_OVER));
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.FORMING_MATRIX_FOR_TRAINING_NN));
+        // формируем марицу для обучения
+        downloadedData.fillMatrixArray();
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.MATRIX_FORMED));
     }
 
 
@@ -100,7 +129,7 @@ public class ReadAndConvert {
     //22.07.2020 0:02:00;9390,0;9392,0;9388,5;9391,5;1017803
     //22.07.2020 0:03:00;9391,5;9392,0;9391,5;9391,5;1142942
     private double getData(Enums e, String in) {
-        String[] strings = in.split(";");
+        String[] strings = in.replaceAll(",", ".").split(";");
 
         if (e.equals(Enums.OPEN)) {
             return Double.parseDouble(strings[1]);
@@ -115,4 +144,5 @@ public class ReadAndConvert {
         }
         return 0.0;
     }
+
 }

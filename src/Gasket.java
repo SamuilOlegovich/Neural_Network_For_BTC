@@ -8,9 +8,11 @@ public class Gasket {
 
 
     private static boolean whetherOrNotShowLearningProcess = false;     // показывать или нет процесс обучения
+    private static double priceChangeToFormHistoryPattern = 30;         // изменение цены для формирования паттерна истории
     private static int numberOfIndicatorsForOneCandle = 13;             // количество показателей по одной свече
+    private static int numberOfCandlesToDetectMovement = 5;             // количество свечек для определения движения buy, sell, flat
     private static boolean turnOnTurnOffLearning = true;                // включить выключить процесс обучения
-    private static int numberOfTrainingCycles = 1000;
+    private static int numberOfTrainingCycles = 10;
     private static int numberOfInputNeurons = 1521;
     private static int numberOfOutputNeurons = 3;
     private static int dateDifference = -3;         // разница в часовом поясе
@@ -34,6 +36,22 @@ public class Gasket {
 
     public static String getLearningProcessHasStarted() {
         return LEARNING_PROCESS_HAS_STARTED_NN;
+    }
+
+    public static int getNumberOfCandlesToDetectMovement() {
+        return numberOfCandlesToDetectMovement;
+    }
+
+    public static void setNumberOfCandlesToDetectMovement(int numberOfCandlesToDetectMovement) {
+        Gasket.numberOfCandlesToDetectMovement = numberOfCandlesToDetectMovement;
+    }
+
+    public static double getPriceChangeToFormHistoryPattern() {
+        return priceChangeToFormHistoryPattern;
+    }
+
+    public static void setPriceChangeToFormHistoryPattern(double priceChangeToFormHistoryPattern) {
+        Gasket.priceChangeToFormHistoryPattern = priceChangeToFormHistoryPattern;
     }
 
     public static int getNumberOfIndicatorsForOneCandle() {

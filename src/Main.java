@@ -21,8 +21,8 @@ public class Main {
         if (Gasket.isTurnOnTurnOffLearning()) {
             DownloadedData downloadedData = new DownloadedData();
             ReadAndConvert readAndConvert = new ReadAndConvert();
-//            TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
-//            teacherNeuralNetwork.startLearning();
+            TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
+            teacherNeuralNetwork.startLearning();
         } else {
             CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
         }

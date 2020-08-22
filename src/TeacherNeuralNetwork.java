@@ -67,8 +67,7 @@ public class TeacherNeuralNetwork {
 
 
     private void digits() {
-        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
-                + " ----- " + Enums.NN_LEARNING_PROCESS_STARTED.toString());
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED.toString()));
         for (int i = 1; i < epochs; i++) {
             int right = 0;
             double errorSum = 0;
@@ -103,11 +102,12 @@ public class TeacherNeuralNetwork {
             }
 
             if (Gasket.isWhetherOrNotShowLearningProcess()) {
-                ConsoleHelper.writeMessage("epoch: " + i + ". correct: " + right + ". error: " + errorSum);
+                ConsoleHelper.writeMessage(StringHelper.getString("epoch: " + i + ". correct: " + right
+                        + ". error: " + errorSum));
             }
         }
-        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
-                + " ----- " + Enums.THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING.toString());
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.
+                THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING.toString()));
         keepTheNumberOfNeuronsInTheLayer();
     }
 
