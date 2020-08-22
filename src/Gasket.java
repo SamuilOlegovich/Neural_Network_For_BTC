@@ -7,8 +7,9 @@ public class Gasket {
     private static NeuralNetwork neuralNetwork;
 
 
-    private static boolean whetherOrNotShowLearningProcess = false; // показывать или нет процесс обучения
-    private static boolean turnOnTurnOffLearning = true;    // включить выключить процесс обучения
+    private static boolean whetherOrNotShowLearningProcess = false;     // показывать или нет процесс обучения
+    private static int numberOfIndicatorsForOneCandle = 13;             // количество показателей по одной свече
+    private static boolean turnOnTurnOffLearning = true;                // включить выключить процесс обучения
     private static int numberOfTrainingCycles = 1000;
     private static int numberOfInputNeurons = 1521;
     private static int numberOfOutputNeurons = 3;
@@ -33,6 +34,14 @@ public class Gasket {
 
     public static String getLearningProcessHasStarted() {
         return LEARNING_PROCESS_HAS_STARTED_NN;
+    }
+
+    public static int getNumberOfIndicatorsForOneCandle() {
+        return numberOfIndicatorsForOneCandle;
+    }
+
+    public static void setNumberOfIndicatorsForOneCandle(int numberOfIndicatorsForOneCandle) {
+        Gasket.numberOfIndicatorsForOneCandle = numberOfIndicatorsForOneCandle;
     }
 
     public static boolean isTurnOnTurnOffLearning() {
