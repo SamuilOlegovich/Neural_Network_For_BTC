@@ -119,6 +119,7 @@ public class TeacherNeuralNetwork {
         try {
             arrayList.add(objectMapper.writeValueAsString(this));
         } catch (JsonProcessingException ex) { }
+
         arrayList.add(Enums.NEXT.toString());
         arrayList.addAll(nn.saveBalanceData());
         Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList);

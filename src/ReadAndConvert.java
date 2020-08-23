@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
 public class ReadAndConvert {
+    private TransformerHistory transformerHistory;
     private DownloadedData downloadedData;
     private String pathHistory;
 
     public ReadAndConvert() {
+        this.transformerHistory = new TransformerHistory();
         this.pathHistory = Gasket.getFilesAndPathCreator().getPathHistory();
         this.downloadedData = Gasket.getDownloadedData();
         readFileHistory();
@@ -28,7 +30,6 @@ public class ReadAndConvert {
             listHistory.clear();
         } catch (Exception e) {
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
-            ConsoleHelper.writeMessage(StringHelper.getString(e.getMessage()));
         }
     }
 
@@ -37,7 +38,12 @@ public class ReadAndConvert {
     private void convertHistory(ArrayList<String> in) {
         ArrayList<String> arrayList = new ArrayList<>(in);
         StringBuilder stringBuilder = new StringBuilder(arrayList.get(0));
+        String stringZero = arrayList.get(1);
+        arrayList.remove(1);
         arrayList.remove(0);
+
+
+
 
         for (String s : arrayList) {
             double open = getData(Enums.OPEN, s);
@@ -77,12 +83,12 @@ public class ReadAndConvert {
     private void findPatterns(ArrayList<String> in) {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
 
-        for (int a = 0; a < ((in.size() - Gasket.getNumberOfInputNeurons()
+        for (int a = 1; a < ((in.size() - Gasket.getNumberOfInputNeurons()
                 / Gasket.getNumberOfIndicatorsForOneCandle()) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
             ArrayList<String> outList = new ArrayList<>();
             int finish = 0;
 
-            for (int i = a; i < (a + (Gasket.getNumberOfInputNeurons()
+            for (int i = a - 1; i < (a + (Gasket.getNumberOfInputNeurons()
                     / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
                 outList.add(in.get(i));
                 finish = i;
