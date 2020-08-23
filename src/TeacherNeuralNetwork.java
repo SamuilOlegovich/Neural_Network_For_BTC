@@ -67,7 +67,7 @@ public class TeacherNeuralNetwork {
 
 
     private void digits() {
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED.toString()));
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED));
         for (int i = 1; i < epochs; i++) {
             int right = 0;
             double errorSum = 0;
@@ -107,7 +107,7 @@ public class TeacherNeuralNetwork {
             }
         }
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.
-                THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING.toString()));
+                THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING));
         keepTheNumberOfNeuronsInTheLayer();
     }
 

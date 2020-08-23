@@ -20,8 +20,8 @@ public class Gasket {
 
     private static final String SETTING_NOW = " --- SETTING_NOW --- ";
     private static final String LEARNING_PROCESS_HAS_STARTED_NN = " ----- СТАРТОВАЛ процесс обучения NN";
-    private static final String THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING =
-            " ----- ПРОЦЕСС ОБУЧЕНИЯ NN ОКОНЧЕН - СОХРАНЯЮСЬ";
+//    private static final String THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING =
+//            " ----- ПРОЦЕСС ОБУЧЕНИЯ NN ОКОНЧЕН - СОХРАНЯЮСЬ";
 
 
 

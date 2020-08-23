@@ -119,7 +119,6 @@ public class ReadAndConvert {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.FORMING_MATRIX_FOR_TRAINING_NN));
         // формируем марицу для обучения
         downloadedData.fillMatrixArray();
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.MATRIX_FORMED));
     }
 
 

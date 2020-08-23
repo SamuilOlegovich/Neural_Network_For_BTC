@@ -20,7 +20,7 @@ public enum Enums {
     FORMING_MATRIX_FOR_TRAINING_NN,
     ФОРМИРУЮ_МАТРИЦУ_ДЛЯ_ОБУЧЕНИЯ_NN,
     MATRIX_FORMED,
-    МАТРИЦА_СФОРМИРОВАНА,
+    МАТРИЦ_СФОРМИРОВАНО,
     DATE_TIME,
     OPEN,
     HIGH,
