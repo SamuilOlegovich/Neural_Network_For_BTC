@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 
 
@@ -31,7 +31,15 @@ public class ConsoleHelper {
                 + " ----- количество выходных нейронов НН\n"
                 + "numberOfInputNeurons === " + Gasket.getNumberOfInputNeurons()
                 + " ----- количество входных нейронов (стоит соблюдать кратность параметру - всегда квадрат " +
-                "- количество ячеек матрицы кратно 13)\n"
+                        "- количество ячеек матрицы кратно 13)\n"
+                + "priceChangeToFormHistoryPattern === " + Gasket.getPriceChangeToFormHistoryPattern()
+                + " ----- изменение цены для формирования паттерна истории\n"
+                + "numberOfIndicatorsForOneCandle === " + Gasket.getNumberOfIndicatorsForOneCandle()
+                + " ----- количество показателей по одной свече\n"
+                + "numberOfCandlesToDetectMovement === " + Gasket.getNumberOfCandlesToDetectMovement()
+                + " ----- количество свечек для определения движения buy, sell, flat\n"
+                + "turnOnTurnOffLearning === " + Gasket.isTurnOnTurnOffLearning()
+                + " ----- включить выключить процесс обучения\n"
                 + "\n"
                 + "\n"
                 + "dateDifference === " + Gasket.getDateDifference()
@@ -62,13 +70,18 @@ public class ConsoleHelper {
     }
 
 
+
     public static void showCommands() {
         ConsoleHelper.writeMessage("\n\n"
                 + "whetherOrNotShowLearningProcess"
+                + "numberOfCandlesToDetectMovement"
+                + "priceChangeToFormHistoryPattern"
+                + "numberOfIndicatorsForOneCandle"
                 + "numberOfTrainingCycles"
                 + "numberOfOutputNeurons"
+                + "turnOnTurnOffLearning"
                 + "dateDifference"
-                + "\n"
+        + "\n"
         );
     }
 }

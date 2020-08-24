@@ -22,6 +22,7 @@ public enum Enums {
     MATRIX_FORMED,
     МАТРИЦ_СФОРМИРОВАНО,
     DATE_TIME,
+    TRUE,
     OPEN,
     HIGH,
     LOW,

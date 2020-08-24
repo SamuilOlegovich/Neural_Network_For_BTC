@@ -15,7 +15,7 @@ public class Gasket {
     private static int numberOfTrainingCycles = 10;
     private static int numberOfInputNeurons = 1521;
     private static int numberOfOutputNeurons = 3;
-    private static int dateDifference = -3;         // разница в часовом поясе
+    private static int dateDifference = -3;                             // разница в часовом поясе
 
 
     private static final String SETTING_NOW = " --- SETTING_NOW --- ";

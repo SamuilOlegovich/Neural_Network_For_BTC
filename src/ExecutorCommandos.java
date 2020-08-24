@@ -36,32 +36,56 @@ public class ExecutorCommandos {
             switch (strings[0]) {
                 case "whetherOrNotShowLearningProcess" :
                     Gasket.setWhetherOrNotShowLearningProcess(strings[1].equalsIgnoreCase("true"));
-                    ConsoleHelper.writeMessage("whetherOrNotShowLearningProcess === "
-                            + Gasket.isWhetherOrNotShowLearningProcess()
+                    ConsoleHelper.writeMessage(StringHelper.getString("whetherOrNotShowLearningProcess === "
+                            + Gasket.isWhetherOrNotShowLearningProcess())
                     );
                     break;
                 case "numberOfTrainingCycles" :
                     Gasket.setNumberOfTrainingCycles(Integer.parseInt(strings[1]));
-                    ConsoleHelper.writeMessage("numberOfTrainingCycles === "
-                            + Gasket.getNumberOfTrainingCycles()
+                    ConsoleHelper.writeMessage(StringHelper.getString("numberOfTrainingCycles === "
+                            + Gasket.getNumberOfTrainingCycles())
                     );
                     break;
                 case "numberOfOutputNeurons" :
                     Gasket.setNumberOfOutputNeurons(Integer.parseInt(strings[1]));
-                    ConsoleHelper.writeMessage("numberOfOutputNeurons === "
-                            + Gasket.getNumberOfOutputNeurons()
+                    ConsoleHelper.writeMessage(StringHelper.getString("numberOfOutputNeurons === "
+                            + Gasket.getNumberOfOutputNeurons())
                     );
                     break;
                 case "numberOfInputNeurons" :
                     Gasket.setNumberOfInputNeurons(Integer.parseInt(strings[1]));
-                    ConsoleHelper.writeMessage("numberOfInputNeurons === "
-                            + Gasket.getNumberOfInputNeurons()
+                    ConsoleHelper.writeMessage(StringHelper.getString("numberOfInputNeurons === "
+                            + Gasket.getNumberOfInputNeurons())
                     );
                     break;
                 case "dateDifference" :
                     Gasket.setDateDifference(Integer.parseInt(strings[1]));
-                    ConsoleHelper.writeMessage("dateDifference === "
-                            + Gasket.getDateDifference()
+                    ConsoleHelper.writeMessage(StringHelper.getString("dateDifference === "
+                            + Gasket.getDateDifference())
+                    );
+                    break;
+                case "priceChangeToFormHistoryPattern" :
+                    Gasket.setPriceChangeToFormHistoryPattern(Integer.parseInt(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("priceChangeToFormHistoryPattern === "
+                            + Gasket.getPriceChangeToFormHistoryPattern())
+                    );
+                    break;
+                case "turnOnTurnOffLearning" :
+                    Gasket.setTurnOnTurnOffLearning(strings[1].equalsIgnoreCase(Enums.TRUE.toString()) ? true : false);
+                    ConsoleHelper.writeMessage(StringHelper.getString("turnOnTurnOffLearning === "
+                            + Gasket.isTurnOnTurnOffLearning())
+                    );
+                    break;
+                case "numberOfCandlesToDetectMovement" :
+                    Gasket.setNumberOfCandlesToDetectMovement(Integer.parseInt(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("numberOfCandlesToDetectMovement === "
+                            + Gasket.getNumberOfCandlesToDetectMovement())
+                    );
+                    break;
+                case "numberOfIndicatorsForOneCandle" :
+                    Gasket.setNumberOfIndicatorsForOneCandle(Integer.parseInt(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("numberOfIndicatorsForOneCandle === "
+                            + Gasket.getNumberOfIndicatorsForOneCandle())
                     );
                     break;
                 case "SETTINGS" :
