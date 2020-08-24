@@ -65,7 +65,7 @@ public class ExecutorCommandos {
                     );
                     break;
                 case "priceChangeToFormHistoryPattern" :
-                    Gasket.setPriceChangeToFormHistoryPattern(Integer.parseInt(strings[1]));
+                    Gasket.setPriceChangeToFormHistoryPattern(Double.parseDouble(strings[1]));
                     ConsoleHelper.writeMessage(StringHelper.getString("priceChangeToFormHistoryPattern === "
                             + Gasket.getPriceChangeToFormHistoryPattern())
                     );

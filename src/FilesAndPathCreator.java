@@ -141,7 +141,7 @@ public class FilesAndPathCreator {
                 pathPatternsDelete = finish + "iiPatterns\\iiTemporaryDelete.txt";
                 pathPatternsForUser = finish + "uPatterns\\iiPatternsForUser.txt";
                 pathPatternsIIPro = finish + "iiProPatterns\\iiProPatterns.txt";
-                pathSavedWeights = finish + "iiProPatterns\\iiProPatterns.txt";
+//                pathSavedWeights = finish + "iiProPatterns\\iiProPatterns.txt";
 
                 pathSavedWeights = finish + "Weights\\SavedWeights.txt";
                 pathSettings = finish + "Settings\\Settings.txt";
@@ -267,10 +267,9 @@ public class FilesAndPathCreator {
             pathPatternsTemporary = string + "Logs/Patterns/TemporaryPatterns.txt";
             pathPatternsIIPro = string + "Logs/PatternsUser/iiProPatterns.txt";
             pathPatternsDelete = string + "Logs/Patterns/TemporaryDelete.txt";
-            pathSavedWeights = string + "Logs/PatternsUser/uPatterns.txt";
-
 
             pathLogs = string + "Logs/Log/" + DatesTimes.getDateLogs() + "===Log.txt";
+            pathSavedWeights = string + "Logs/Weights/SavedWeights.txt";
             pathWeights = string + "Logs/Weights/Weights.txt";
             pathHistory = string + "Logs/History/History.txt";
             pathSettings = string + "Logs/Settings.txt";

@@ -22,7 +22,7 @@ public class Main {
             DownloadedData downloadedData = new DownloadedData();
             ReadAndConvert readAndConvert = new ReadAndConvert();
             TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
-            teacherNeuralNetwork.startLearning();
+//            teacherNeuralNetwork.startLearning();
         } else {
             CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
         }

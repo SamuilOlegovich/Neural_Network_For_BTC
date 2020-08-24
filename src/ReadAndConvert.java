@@ -102,7 +102,6 @@ public class ReadAndConvert {
             finish++;
 
             for (int i = finish; i < finish + Gasket.getNumberOfCandlesToDetectMovement(); i++) {
-//
                 String s = in.get(i);
                 double close = StringHelper.getDataHistory(Enums.CLOSE, s);
                 double high = StringHelper.getDataHistory(Enums.HIGH, s);
@@ -124,7 +123,6 @@ public class ReadAndConvert {
             convertHistory(outList);
         }
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_CONVERSION_OVER));
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.FORMING_MATRIX_FOR_TRAINING_NN));
         // формируем марицу для обучения
         downloadedData.fillMatrixArray();
     }

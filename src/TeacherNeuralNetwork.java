@@ -44,14 +44,6 @@ public class TeacherNeuralNetwork {
         numberOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
         numberOfNeuronsInLayer[5] = 3;
 
-//        return new NeuralNetwork(0.001, sigmoid, dsigmoid,
-//                numberOfSensoryNeurons                       // 1521
-//                , (int) Math.round(numberOfSensoryNeurons * 2.1)    // 4258
-//                , (int) Math.round(numberOfSensoryNeurons * 1.2)    // 2281
-//                , (int) Math.round(numberOfSensoryNeurons * 0.5)    // 912
-//                , (int) Math.round(numberOfSensoryNeurons * 0.1)    // 152
-//                , 3);
-
         return new NeuralNetwork(0.001, sigmoid, dsigmoid, numberOfNeuronsInLayer);
     }
 
