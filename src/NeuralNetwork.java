@@ -99,15 +99,15 @@ public class NeuralNetwork {
 
     // созхранняем все данные весов, нейронов смещения и т д
     protected ArrayList<String> saveBalanceData() {
-        ObjectMapper objectMapper = new ObjectMapper();
         ArrayList<String> arrayList = new ArrayList<>();
-
         for (Layer l : layers) {
+            ObjectMapper objectMapper = new ObjectMapper();
             try {
                 arrayList.add(objectMapper.writeValueAsString(l));
-                arrayList.add(Enums.NEXT.toString());
+                arrayList.add("\n" + Enums.NEXT.toString() + "\n");
             } catch (JsonProcessingException ex) { }
         }
+        // удаляем последеий NEXT
         arrayList.remove(arrayList.size() - 1);
         return arrayList;
     }

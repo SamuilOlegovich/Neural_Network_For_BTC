@@ -26,10 +26,20 @@ public class ReadAndConvert {
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));
 
             listHistory.remove(0);
+
+            /////////////////////////////////
+            for (int i = listHistory.size() - 1; i >= 1000; i--) {
+                listHistory.remove(i);
+            }
+            /////////////////////////////////
+
             findPatterns(listHistory);
             listHistory.clear();
         } catch (Exception e) {
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
+            ConsoleHelper.writeMessage(e.getStackTrace().toString());
+            ConsoleHelper.writeMessage(e.getMessage());
+            ConsoleHelper.writeMessage(e.getLocalizedMessage());
         }
     }
 
@@ -42,35 +52,8 @@ public class ReadAndConvert {
         arrayList.remove(1);
         arrayList.remove(0);
 
-
         for (String s : arrayList) {
             stringBuilder.append(";").append(transformerHistory.transformHistory(s));
-//            double open = getData(Enums.OPEN, s);
-//            double high = getData(Enums.HIGH, s);
-//            double close = getData(Enums.CLOSE, s);
-//            double low = getData(Enums.LOW, s);
-//            double volume = getData(Enums.VOLUME, s);
-//
-//            double candleBody = open - close;                                   // тело свечи
-//            double fromHighToLow = high - low;                                  // от хай до лов
-//            double upperShadow = open > close ? high - open : high - close;     // верхняя тень
-//            double lowerShadow = open > close ? close - low : open - low;       // нижняя тень
-//            double openHigh = high - open;                                      // опен хай
-//            double openLow = open - low;                                        // опен лов
-//            double volumePerPoint = volume / fromHighToLow;                     // объем на пункт
-//            double volumeInCandleBody = volumePerPoint * candleBody;            // объем в теле свечи
-//            double volumeAtTopOfShadow = volumePerPoint * upperShadow;          // объем в верхней части тени
-//            double volumeAtLowOfShadow = volumePerPoint * lowerShadow;          // объем в нижней части тени
-//            double volumeOpenHigh = volumePerPoint * openHigh;                  // объем в опен хай
-//            double volumeOpenLow = volumePerPoint * openLow;                    // объем в опен лов
-//            double volumeOfWholeCandle = volume;                                // объем всей свечи
-
-//            stringBuilder.append(";").append(candleBody).append(";").append(fromHighToLow).append(";")
-//                    .append(upperShadow).append(";").append(lowerShadow).append(";").append(openHigh).append(";")
-//                    .append(openLow).append(";").append(volumePerPoint).append(";").append(volumeInCandleBody)
-//                    .append(";").append(volumeAtTopOfShadow).append(";").append(volumeAtLowOfShadow)
-//                    .append(";").append(volumeOpenHigh).append(";").append(volumeOpenLow)
-//                    .append(";").append(volumeOfWholeCandle);
         }
         arrayList.clear();
         // наполняем входящий лист отконвертированными строками для обучения NN
@@ -83,8 +66,8 @@ public class ReadAndConvert {
     private void findPatterns(ArrayList<String> in) {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
 
-        for (int a = 1; a < ((in.size() - Gasket.getNumberOfInputNeurons()
-                / Gasket.getNumberOfIndicatorsForOneCandle()) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
+        for (int a = 1; a < ((in.size() - (Gasket.getNumberOfInputNeurons()
+                / Gasket.getNumberOfIndicatorsForOneCandle())) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
             ArrayList<String> outList = new ArrayList<>();
             int finish = 0;
 
@@ -126,28 +109,4 @@ public class ReadAndConvert {
         // формируем марицу для обучения
         downloadedData.fillMatrixArray();
     }
-
-
-//    // DATE_TIME;OPEN;HIGH;LOW;CLOSE;VOLUME
-//    //22.07.2020 0:00:00;9393,5;9398,0;9393,0;9394,0;4808147
-//    //22.07.2020 0:01:00;9394,0;9394,5;9389,5;9390,0;2206761
-//    //22.07.2020 0:02:00;9390,0;9392,0;9388,5;9391,5;1017803
-//    //22.07.2020 0:03:00;9391,5;9392,0;9391,5;9391,5;1142942
-//    private double getData(Enums e, String in) {
-//        String[] strings = in.replaceAll(",", ".").split(";");
-//
-//        if (e.equals(Enums.OPEN)) {
-//            return Double.parseDouble(strings[1]);
-//        } else if (e.equals(Enums.HIGH)) {
-//            return Double.parseDouble(strings[2]);
-//        } else if (e.equals(Enums.LOW)) {
-//            return Double.parseDouble(strings[3]);
-//        } else if (e.equals(Enums.CLOSE)) {
-//            return Double.parseDouble(strings[4]);
-//        } else if (e.equals(Enums.VOLUME)) {
-//            return Double.parseDouble(strings[5]);
-//        }
-//        return 0.0;
-//    }
-
 }
