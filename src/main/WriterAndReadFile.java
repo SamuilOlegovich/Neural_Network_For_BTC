@@ -1,4 +1,6 @@
-package Main;
+package main;
+
+import main.view.ConsoleHelper;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,6 +1,10 @@
-package Main;
+package main;
+
+import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
+
+
 
 public class ReadAndWriteNeuralNetworkSetting {
     private String pathSavedWeights;
@@ -17,8 +21,29 @@ public class ReadAndWriteNeuralNetworkSetting {
 
 
     // считываем настройки NN
-    private void readFileWeights() {
+    protected void readFileWeights() {
+        try {
+            ArrayList<String> listHistory =  WriterAndReadFile.readFile(pathSavedWeights);
 
+            if (listHistory.size() < 1) {
+                ConsoleHelper.writeMessage(StringHelper.getString(Enums.SETTINGS_IN_THE_HISTORY_FILE_NOT_DETECTED));
+            }
+
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));
+
+            listHistory.remove(0);
+
+            /////////////////////////////////
+//            for (int i = listHistory.size() - 1; i >= 1000; i--) {
+//                listHistory.remove(i);
+//            }
+            /////////////////////////////////
+
+//            findPatterns(listHistory);
+            listHistory.clear();
+        } catch (Exception e) {
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
+        }
     }
 
 

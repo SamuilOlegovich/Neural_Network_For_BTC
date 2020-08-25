@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 public class Layer {
     public int size;

@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 public enum Enums {
     THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING,

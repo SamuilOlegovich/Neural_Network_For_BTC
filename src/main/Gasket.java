@@ -1,4 +1,10 @@
-package Main;
+package main;
+
+import main.controller.Commandos;
+import main.controller.RunTheProgram;
+import main.model.DownloadedData;
+import main.model.FilesAndPathCreator;
+import main.view.View;
 
 public class Gasket {
     private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
@@ -7,6 +13,9 @@ public class Gasket {
     private static ExecutorCommandos executorCommandos;
     private static DownloadedData downloadedData;
     private static NeuralNetwork neuralNetwork;
+    private static RunTheProgram runTheProgram;
+    private static Commandos commandos;
+    private static View view;
 
 
     private static boolean whetherOrNotShowLearningProcess = false;     // показывать или нет процесс обучения
@@ -36,6 +45,31 @@ public class Gasket {
 
     public static String getLearningProcessHasStarted() {
         return LEARNING_PROCESS_HAS_STARTED_NN;
+    }
+
+
+    public static Commandos getCommandos() {
+        return commandos;
+    }
+
+    public static void setCommandos(Commandos commandos) {
+        Gasket.commandos = commandos;
+    }
+
+    public static View getViewThread() {
+        return view;
+    }
+
+    public static void setViewThread(View view) {
+        Gasket.view = view;
+    }
+
+    public static RunTheProgram getRunTheProgram() {
+        return runTheProgram;
+    }
+
+    public static void setRunTheProgram(RunTheProgram runTheProgram) {
+        Gasket.runTheProgram = runTheProgram;
     }
 
     public static int getNumberOfCandlesToDetectMovement() {

@@ -1,8 +1,9 @@
-package Main;
+package main;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
 import java.util.function.UnaryOperator;
@@ -14,19 +15,22 @@ public class TeacherNeuralNetwork {
     private UnaryOperator<Double> dsigmoid;
     @JsonIgnore
     private UnaryOperator<Double> sigmoid;
+    @JsonIgnore
+    private double[][] inputs;                   // паттерны
+    @JsonIgnore
+    private NeuralNetwork nn;
+    @JsonIgnore
+    private int[] digits;                        // для ответов к паттенам
+
+
+    private int[] numberOfNeuronsInLayer;        // количество нейронов в слое
     private int numberOfSensoryNeurons;
     private int numberOfOutputNeurons;
     private int samples;                         // количество входящих паттернов
     private int epochs;
 
-    private int[] numberOfNeuronsInLayer;        // количество нейронов в слое
-    private int[] digits;                        // для ответов к паттенам
 
-    @JsonIgnore
-    private double[][] inputs;                   // паттерны
 
-    @JsonIgnore
-    private NeuralNetwork nn;
 
     public TeacherNeuralNetwork() {
         this.numberOfSensoryNeurons = Gasket.getDownloadedData().getNumberOfSensoryNeurons();
@@ -170,29 +174,5 @@ public class TeacherNeuralNetwork {
 
     public void setNumberOfNeuronsInLayer(int[] numberOfNeuronsInLayer) {
         this.numberOfNeuronsInLayer = numberOfNeuronsInLayer;
-    }
-
-    public int[] getDigits() {
-        return digits;
-    }
-
-    public void setDigits(int[] digits) {
-        this.digits = digits;
-    }
-
-    public double[][] getInputs() {
-        return inputs;
-    }
-
-    public void setInputs(double[][] inputs) {
-        this.inputs = inputs;
-    }
-
-    public NeuralNetwork getNn() {
-        return nn;
-    }
-
-    public void setNn(NeuralNetwork nn) {
-        this.nn = nn;
     }
 }

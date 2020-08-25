@@ -1,5 +1,7 @@
-package Main;
+package main;
 
+
+import main.model.DatesTimes;
 
 public class StringHelper {
 

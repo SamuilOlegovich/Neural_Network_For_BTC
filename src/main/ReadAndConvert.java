@@ -1,4 +1,7 @@
-package Main;
+package main;
+
+import main.model.DownloadedData;
+import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
 
@@ -30,18 +33,15 @@ public class ReadAndConvert {
             listHistory.remove(0);
 
             /////////////////////////////////
-            for (int i = listHistory.size() - 1; i >= 1000; i--) {
-                listHistory.remove(i);
-            }
+//            for (int i = listHistory.size() - 1; i >= 1000; i--) {
+//                listHistory.remove(i);
+//            }
             /////////////////////////////////
 
             findPatterns(listHistory);
             listHistory.clear();
         } catch (Exception e) {
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
-            ConsoleHelper.writeMessage(e.getStackTrace().toString());
-            ConsoleHelper.writeMessage(e.getMessage());
-            ConsoleHelper.writeMessage(e.getLocalizedMessage());
         }
     }
 
