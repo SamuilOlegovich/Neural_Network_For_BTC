@@ -1,3 +1,5 @@
+package Main;
+
 public class Gasket {
     private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private static TeacherNeuralNetwork teacherNeuralNetwork;

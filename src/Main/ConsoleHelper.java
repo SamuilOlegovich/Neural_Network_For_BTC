@@ -1,3 +1,5 @@
+package Main;
+
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
@@ -9,10 +11,10 @@ public class ConsoleHelper {
 
 
     public static void writeMessage(String string) {
-//        bitmex.Bot.model.Gasket.getViewThread().updateInfoView(string);
+//        bitmex.Bot.model.Main.Main.Gasket.getViewThread().updateInfoView(string);
 
-//        WriterAndReadFile.writerFile(string + "\n"
-//                , Gasket.getFilesAndPathCreator().getPathLogs()
+//        Main.WriterAndReadFile.writerFile(string + "\n"
+//                , Main.Main.Gasket.getFilesAndPathCreator().getPathLogs()
 //                , true);
         System.out.println(string);
     }

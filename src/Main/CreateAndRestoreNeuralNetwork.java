@@ -1,3 +1,5 @@
+package Main;
+
 public class CreateAndRestoreNeuralNetwork {
     private ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private NeuralNetwork neuralNetwork;

@@ -1,3 +1,5 @@
+package Main;
+
 public enum Enums {
     THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING,
     ПРОЦЕСС_ОБУЧЕНИЯ_NN_ОКОНЧЕН_СОХРАНЯЮСЬ,

@@ -1,11 +1,6 @@
-import java.util.function.UnaryOperator;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+package Main;
+
 import java.io.IOException;
-import java.io.File;
-
-
-
 
 
 public class Main {
@@ -28,7 +23,7 @@ public class Main {
         }
 
         // запускаем визуальную часть
-//        FormDigits f = new FormDigits(Gasket.getNeuralNetwork());
+//        Main.FormDigits f = new Main.FormDigits(Main.Main.Gasket.getNeuralNetwork());
 //        new Thread(f).start();
     }
 
