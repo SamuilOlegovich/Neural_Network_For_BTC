@@ -47,7 +47,11 @@ public class ReadAndWriteNeuralNetworkSetting {
     protected void saveAllNeuralNetworkData(ArrayList<String> in) {
         ArrayList<String> arrayList = new ArrayList<>(in);
         StringBuilder stringBuilder = new StringBuilder(Enums.START.toString() + "\n");
-
+//        /////////////////////////////////
+//            for (String s : in) {
+//                ConsoleHelper.writeMessage(s);
+//            }
+//        ////////////////////////////////
         if (in.get(0).equalsIgnoreCase(Enums.NEXT.toString())) {
             arrayList.remove(0);
         }
@@ -56,7 +60,7 @@ public class ReadAndWriteNeuralNetworkSetting {
             stringBuilder.append(s);
         }
 
-        stringBuilder.append("\n" + Enums.END.toString()).append("\n\n");
+        stringBuilder.append("\n").append(Enums.END.toString()).append("\n\n");
 
         try {
             WriterAndReadFile.writerFile(stringBuilder.toString(), pathSavedWeights, false);

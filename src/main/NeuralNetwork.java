@@ -153,6 +153,11 @@ public class NeuralNetwork {
         } catch (JsonProcessingException ex) { }
         // удаляем последеий NEXT
         arrayList.remove(arrayList.size() - 1);
+//        ///////////////////////////////
+//            for (String s : arrayList) {
+//                ConsoleHelper.writeMessage(s);
+//            }
+//        ////////////////////////////////
         return arrayList;
     }
 }

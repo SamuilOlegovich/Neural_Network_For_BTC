@@ -2,8 +2,6 @@ package main;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Arrays;
-import java.util.Objects;
 
 public class Layer {
     public int ID;
@@ -68,6 +66,7 @@ public class Layer {
         ID = hashCode();
     }
 
+    @JsonIgnore
     public int getID() {
         return ID;
     }

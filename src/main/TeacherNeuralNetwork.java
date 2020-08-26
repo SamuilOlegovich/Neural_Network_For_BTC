@@ -134,6 +134,11 @@ public class TeacherNeuralNetwork {
 
         arrayList.add("\n" + Enums.NEXT.toString() + "\n");
         arrayList.addAll(nn.saveBalanceData());
+//        ///////////////////////////////
+//            for (String s : arrayList) {
+//                ConsoleHelper.writeMessage(s);
+//            }
+//        ////////////////////////////////
         Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList);
     }
 
