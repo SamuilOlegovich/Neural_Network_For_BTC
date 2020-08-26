@@ -23,11 +23,11 @@ public class NeuralNetwork {
 
     public NeuralNetwork(double learningRate, UnaryOperator<Double> activation,
                          UnaryOperator<Double> derivative, int... sizes) {
+
         this.learningRate = learningRate;   // скорость обучения
         this.activation = activation;
         this.derivative = derivative;       // производное
-
-        layers = new Layer[sizes.length];
+        this.layers = new Layer[sizes.length];
 
         for (int i = 0; i < sizes.length; i++) {
             int nextSize = 0;
@@ -50,6 +50,21 @@ public class NeuralNetwork {
         this.layersLength = layers.length;
     }
 
+
+    public NeuralNetwork(double learningRate, UnaryOperator<Double> activation,
+                         UnaryOperator<Double> derivative, int[] sizes, Layer[] layers) {
+
+        this.learningRate = learningRate;   // скорость обучения
+        this.activation = activation;
+        this.derivative = derivative;       // производное
+        fillInLayers(layers);
+        this.layersLength = layers.length;
+    }
+
+
+
+
+
     public double[] feedForward(double[] inputs) {
         System.arraycopy(inputs, 0, layers[0].neurons, 0, inputs.length);
         for (int i = 1; i < layers.length; i++)  {
@@ -66,6 +81,8 @@ public class NeuralNetwork {
         }
         return layers[layers.length - 1].neurons;
     }
+
+
 
     public void backpropagation(double[] targets) {
         double[] errors = new double[layers[layers.length - 1].size];
@@ -108,17 +125,27 @@ public class NeuralNetwork {
         }
     }
 
+
+
+    private void fillInLayers(Layer[] in) {
+        this.layers = new Layer[in.length];
+
+        for (int i = 0; i < layers.length; i++) {
+            layers[i] = in[i];
+        }
+    }
+
+
+
     // созхранняем все данные весов, нейронов смещения и т д
     protected ArrayList<String> saveBalanceData() {
         ArrayList<String> arrayList = new ArrayList<>();
 //        ObjectMapper objectMapp = new ObjectMapper();
-
         try {
 //            arrayList.add(objectMapp.writeValueAsString(this));
 //            arrayList.add("\n" + Enums.NEXT.toString() + "\n");
-
-
             for (Layer l : layers) {
+                l.setID();
                 ObjectMapper objectMapper = new ObjectMapper();
                 arrayList.add(objectMapper.writeValueAsString(l));
                 arrayList.add("\n" + Enums.NEXT.toString() + "\n");
@@ -128,8 +155,4 @@ public class NeuralNetwork {
         arrayList.remove(arrayList.size() - 1);
         return arrayList;
     }
-
-//    public int getLayersLength() {
-//        return layersLength;
-//    }
 }

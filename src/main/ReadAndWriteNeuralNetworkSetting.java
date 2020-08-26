@@ -34,9 +34,9 @@ public class ReadAndWriteNeuralNetworkSetting {
         }
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.WEIGHTS_SUCCESSFULLY_READ));
             /////////////////////////////////
-            for (String s : listHistory) {
-                ConsoleHelper.writeMessage(s);
-            }
+//            for (String s : listHistory) {
+//                ConsoleHelper.writeMessage(s);
+//            }
             ////////////////////////////////
         return listHistory;
     }

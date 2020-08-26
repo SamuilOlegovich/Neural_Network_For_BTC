@@ -1,6 +1,7 @@
 package main;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
 import java.util.function.UnaryOperator;
@@ -24,7 +25,9 @@ public class CreateAndRestoreNeuralNetwork {
     private double[] neurons;               // нейроны
     private double[] biases;                // смещение
     private Layer[] layers;
+    private int nextSize;
     private int size;
+    private int ID;
 
 
     public CreateAndRestoreNeuralNetwork() {
@@ -37,33 +40,86 @@ public class CreateAndRestoreNeuralNetwork {
     }
 
 
-
-
     public void restoreNN() {
         // {"numberOfNeuronsInLayer":[90,189,108,45,9,3],"numberOfSensoryNeurons":90,
         // "numberOfOutputNeurons":3,"samples":43900,"epochs":5}
-        listInSavedWeights = new ArrayList<>(readAndWriteNeuralNetworkSetting.readFileWeights());
+        this.listInSavedWeights = new ArrayList<>(readAndWriteNeuralNetworkSetting.readFileWeights());
 
+        // находим первую строку параметров, инициализируем и заполнянем массив количества нейронов,
+        // а так же создаем слои и заполняем ими массив слоев
+        int index = 0;
         for (String s : listInSavedWeights) {
             if (s.equalsIgnoreCase(Enums.START.toString())) {
+                index = listInSavedWeights.indexOf(s) + 1;
                 String[] param = parseString(Enums.NUMBERSofNEURONSinLAYER,
                         listInSavedWeights.get(listInSavedWeights.indexOf(s) + 1))
                         .replaceAll("\\[", "").replaceAll("]", "")
                         .split(",");
+
                 numbersOfNeuronsInLayer = new int[param.length];
+                layers = new Layer[param.length];
+
                 for (int i = 0; i < param.length; i++) {
                     numbersOfNeuronsInLayer[i] = Integer.parseInt(param[i]);
                 }
+            } else {
+                ConsoleHelper.writeMessage(StringHelper.getString(Enums.INCORRECT_WEIGHT_FORMAT));
             }
             break;
         }
-        listInSavedWeights.remove(2);
-        listInSavedWeights.remove(1);
-        listInSavedWeights.remove(0);
+
+        listInSavedWeights.remove(index);
+
+        for (int i = listInSavedWeights.size() - 1; i >= 0; i--) {
+            if (!listInSavedWeights.get(i).startsWith("{\"") && !listInSavedWeights.get(i).endsWith("\"}")) {
+                listInSavedWeights.remove(i);
+            }
+        }
+        int countLayers = 0;
+
+        // приступаем к наполнению весов
+        for (String s : listInSavedWeights) {
+            ID = Integer.parseInt(parseString(Enums.ID, s));
+            size = Integer.parseInt(parseString(Enums.SIZE, s));
+            nextSize = Integer.parseInt(parseString(Enums.NextSIZE, s));
+
+            String[] biasesParam = parseString(Enums.BIASES, s)
+                    .replaceAll("\\[", "").replaceAll("]", "")
+                    .split(",");
+            biases = new double[biasesParam.length];
+            for (int i = 0; i < biasesParam.length; i++) {
+                biases[i] = Double.parseDouble(biasesParam[i]);
+            }
+
+            String[] weightsParam = parseString(Enums.WEIGHTS, s).split("],\\[");
+            weights = new double[size][nextSize];
+            for (int i = 0; i < weightsParam.length; i++) {
+                String[] outWeightsParam = weightsParam[i]
+                        .replaceAll("\\[", "").replaceAll("]", "")
+                        .split(",");
+                for (int j = 0; j < outWeightsParam.length; j++) {
+                    weights[i][j] = Double.parseDouble(outWeightsParam[j]);
+                }
+            }
+
+            Layer layer = new Layer(size, nextSize, biases, weights);
+            layer.setID();
+
+            if (layer.getID() == ID) {
+                ConsoleHelper.writeMessage(StringHelper.getString((countLayers + 1)
+                        + " " + Enums.LAYER_OF_NEURONS_RESTORED.toString()));
+                layers[countLayers] = layer;
+            } else {
+                ConsoleHelper.writeMessage(layer.getID() + " --- " + ID);
+                ConsoleHelper.writeMessage(StringHelper.getString((Enums.ERROR.toString()
+                        + " " + countLayers) + " " + Enums.LAYER_OF_NEURONS_NOT_RESTORED.toString()));
+            }
+            countLayers++;
 
 
+        }
 
-        neuralNetwork = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer);
+        neuralNetwork = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
         Gasket.setNeuralNetwork(neuralNetwork);
     }
 
@@ -77,6 +133,7 @@ public class CreateAndRestoreNeuralNetwork {
 
 
     private String parseString(Enums key, String in) {
+//        ConsoleHelper.writeMessage(key.toString() + "   " + in);
         String[] strings = in.replaceAll("\\{", "")
                 .replaceAll("}", "").split(",\"");
         for (String s : strings) {
@@ -87,6 +144,4 @@ public class CreateAndRestoreNeuralNetwork {
         }
         return null;
     }
-
-
 }

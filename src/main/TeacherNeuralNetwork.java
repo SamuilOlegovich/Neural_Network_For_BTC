@@ -171,11 +171,11 @@ public class TeacherNeuralNetwork {
         this.epochs = epochs;
     }
 
-    public int[] getNumberOfNeuronsInLayer() {
+    public int[] getNumbersOfNeuronsInLayer() {
         return numbersOfNeuronsInLayer;
     }
 
-    public void setNumberOfNeuronsInLayer(int[] numberOfNeuronsInLayer) {
+    public void setNumbersOfNeuronsInLayer(int[] numberOfNeuronsInLayer) {
         this.numbersOfNeuronsInLayer = numberOfNeuronsInLayer;
     }
 }
