@@ -1,5 +1,6 @@
 package main.view;
 
+import main.StringHelper;
 import main.model.DatesTimes;
 import main.Gasket;
 import main.controller.RunTheProgram;
@@ -90,8 +91,7 @@ public class View extends Thread {
 
                 if (runTheProgram != null) {
                     runTheProgram.startProgram();
-                    ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
-                            + " --- Программа ЗАПУЩЕНА");
+                    ConsoleHelper.writeMessage(StringHelper.getString("Программа ЗАПУЩЕНА"));
                 }
                 if (runTheProgram == null) {
                     runTheProgram = new RunTheProgram();
@@ -108,8 +108,7 @@ public class View extends Thread {
                 jPanel.setBackground(Color.RED);
 
                 runTheProgram.stopPrograms();
-                ConsoleHelper.writeMessage(DatesTimes.getDateTerminal()
-                        + " --- Программа ОСТАНОВЛЕНА");
+                ConsoleHelper.writeMessage(StringHelper.getString("Программа ОСТАНОВЛЕНА"));
 
             }
         });
@@ -126,7 +125,7 @@ public class View extends Thread {
                         Color color = jPanel.getBackground();
                         jPanel.setBackground(Color.yellow);
                         try {
-                            Thread.sleep(1000 * 10);
+                            Thread.sleep(1000 * 5);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }

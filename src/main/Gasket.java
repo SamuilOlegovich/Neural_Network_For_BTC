@@ -8,6 +8,7 @@ import main.view.View;
 
 public class Gasket {
     private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
+    private static CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork;
     private static TeacherNeuralNetwork teacherNeuralNetwork;
     private static FilesAndPathCreator filesAndPathCreator;
     private static ExecutorCommandos executorCommandos;
@@ -26,6 +27,7 @@ public class Gasket {
     private static int numberOfTrainingCycles = 10;
     private static int numberOfInputNeurons = 1300;
     private static int numberOfOutputNeurons = 3;
+    private static double learningRate = 0.001;
     private static int dateDifference = -3;                             // разница в часовом поясе
 
 
@@ -47,6 +49,22 @@ public class Gasket {
         return LEARNING_PROCESS_HAS_STARTED_NN;
     }
 
+
+    public static double getLearningRate() {
+        return learningRate;
+    }
+
+    public static void setLearningRate(double learningRate) {
+        Gasket.learningRate = learningRate;
+    }
+
+    public static CreateAndRestoreNeuralNetwork getCreateAndRestoreNeuralNetwork() {
+        return createAndRestoreNeuralNetwork;
+    }
+
+    public static void setCreateAndRestoreNeuralNetwork(CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork) {
+        Gasket.createAndRestoreNeuralNetwork = createAndRestoreNeuralNetwork;
+    }
 
     public static Commandos getCommandos() {
         return commandos;

@@ -22,22 +22,19 @@ public class ReadAndConvert {
 
     private void readFileHistory() {
         try {
-            ArrayList<String> listHistory =  WriterAndReadFile.readFile(pathHistory);
+            ArrayList<String> listHistory =  new ArrayList<>(WriterAndReadFile.readFile(pathHistory));
 
             if (listHistory.size() < 1) {
-                ConsoleHelper.writeMessage(StringHelper.getString(Enums.SETTINGS_IN_THE_HISTORY_FILE_NOT_DETECTED));
+                ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_FILE_NOT_DETECTED));
+//                throw new Exception();
             }
-
-            ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));
-
             listHistory.remove(0);
-
             /////////////////////////////////
 //            for (int i = listHistory.size() - 1; i >= 1000; i--) {
 //                listHistory.remove(i);
 //            }
             /////////////////////////////////
-
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));
             findPatterns(listHistory);
             listHistory.clear();
         } catch (Exception e) {

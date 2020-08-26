@@ -7,12 +7,18 @@ public enum Enums {
     СТАРТОВАЛ_ПРОЦЕСС_ОБУЧЕНИЯ_NN,
     WEIGHTS_NOT_SAVED,
     ВЕСА_НЕ_СОХРАНИЛИСЬ,
-    SETTINGS_IN_THE_HISTORY_FILE_NOT_DETECTED,
-    НАСТРОЕК_В_ФАЙЛЕ_ИСТОРИИ_НЕ_ОБНАРУЖЕНО,
+    HISTORY_FILE_NOT_DETECTED,
+    ФАЙЛ_ИСТОРИИ_НЕ_ОБНАРУЖЕНО,
+    WEIGHTS_FILE_NOT_DETECTED,
+    ФАЙЛ_ВЕСОВ_НЕ_ОБНАРУЖЕНО,
+    ERROR_WHEN_READING_THE_WEIGHTS_FILE,
+    ОШИБКА_ПРИ_ЧТЕНИИ_ФАЙЛА_ВЕСОВ,
     ERROR_WHEN_READING_THE_HISTORY_FILE,
     ОШИБКА_ПРИ_ЧТЕНИИ_ФАЙЛА_ИСТОРИИ,
     HISTORY_SUCCESSFULLY_READ,
     ИСТОРИЯ_УСПЕШНО_СЧИТАНА,
+    WEIGHTS_SUCCESSFULLY_READ,
+    ВЕСА_УСПЕШНО_СЧИТАНЫ,
     STARTING_CONVERTING_HISTORY,
     НАЧИНАЮ_КОНВЕРТИРОВАТ_ИСТОРИЮ,
     HISTORY_CONVERSION_OVER,
@@ -36,5 +42,6 @@ public enum Enums {
     END,
     START,
     NEXT,
-    SETTING_NOW;
+    SETTING_NOW,
+    NUMBERSofNEURONSinLAYER;
 }

@@ -1,5 +1,6 @@
 package main;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,11 +8,18 @@ import java.util.ArrayList;
 import java.util.function.UnaryOperator;
 
 public class NeuralNetwork {
-
+    @JsonIgnore
     private UnaryOperator<Double> derivative;
+    @JsonIgnore
     private UnaryOperator<Double> activation;
+    @JsonIgnore
     private double learningRate;
+    @JsonIgnore
     private Layer[] layers;                     // массив слоёв
+
+    private int layersLength;                   // длина масива слоев
+
+
 
     public NeuralNetwork(double learningRate, UnaryOperator<Double> activation,
                          UnaryOperator<Double> derivative, int... sizes) {
@@ -38,6 +46,8 @@ public class NeuralNetwork {
                 }
             }
         }
+
+        this.layersLength = layers.length;
     }
 
     public double[] feedForward(double[] inputs) {
@@ -101,15 +111,25 @@ public class NeuralNetwork {
     // созхранняем все данные весов, нейронов смещения и т д
     protected ArrayList<String> saveBalanceData() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (Layer l : layers) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
+//        ObjectMapper objectMapp = new ObjectMapper();
+
+        try {
+//            arrayList.add(objectMapp.writeValueAsString(this));
+//            arrayList.add("\n" + Enums.NEXT.toString() + "\n");
+
+
+            for (Layer l : layers) {
+                ObjectMapper objectMapper = new ObjectMapper();
                 arrayList.add(objectMapper.writeValueAsString(l));
                 arrayList.add("\n" + Enums.NEXT.toString() + "\n");
-            } catch (JsonProcessingException ex) { }
-        }
+            }
+        } catch (JsonProcessingException ex) { }
         // удаляем последеий NEXT
         arrayList.remove(arrayList.size() - 1);
         return arrayList;
     }
+
+//    public int getLayersLength() {
+//        return layersLength;
+//    }
 }

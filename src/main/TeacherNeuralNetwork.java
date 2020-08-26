@@ -16,6 +16,8 @@ public class TeacherNeuralNetwork {
     @JsonIgnore
     private UnaryOperator<Double> sigmoid;
     @JsonIgnore
+    private double learningRate;
+    @JsonIgnore
     private double[][] inputs;                   // паттерны
     @JsonIgnore
     private NeuralNetwork nn;
@@ -23,7 +25,7 @@ public class TeacherNeuralNetwork {
     private int[] digits;                        // для ответов к паттенам
 
 
-    private int[] numberOfNeuronsInLayer;        // количество нейронов в слое
+    private int[] numbersOfNeuronsInLayer;        // количество нейронов в слое
     private int numberOfSensoryNeurons;
     private int numberOfOutputNeurons;
     private int samples;                         // количество входящих паттернов
@@ -39,6 +41,7 @@ public class TeacherNeuralNetwork {
         this.digits = Gasket.getDownloadedData().getRepliesForNN();
         this.inputs = Gasket.getDownloadedData().getDataForNN();
         this.epochs = Gasket.getNumberOfTrainingCycles();
+        this.learningRate = Gasket.getLearningRate();
         this.sigmoid = x -> 1 / (1 + Math.exp(-x));
         this.dsigmoid = y -> y * (1 - y);
         this.nn = createNeuralNetwork();
@@ -49,15 +52,15 @@ public class TeacherNeuralNetwork {
 
 
     private NeuralNetwork createNeuralNetwork() {
-        numberOfNeuronsInLayer = new int[6];
-        numberOfNeuronsInLayer[0] = numberOfSensoryNeurons;
-        numberOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
-        numberOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
-        numberOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
-        numberOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
-        numberOfNeuronsInLayer[5] = 3;
+        numbersOfNeuronsInLayer = new int[6];
+        numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
+        numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
+        numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
+        numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
+        numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
+        numbersOfNeuronsInLayer[5] = 3;
 
-        return new NeuralNetwork(0.001, sigmoid, dsigmoid, numberOfNeuronsInLayer);
+        return new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer);
     }
 
 
@@ -169,10 +172,10 @@ public class TeacherNeuralNetwork {
     }
 
     public int[] getNumberOfNeuronsInLayer() {
-        return numberOfNeuronsInLayer;
+        return numbersOfNeuronsInLayer;
     }
 
     public void setNumberOfNeuronsInLayer(int[] numberOfNeuronsInLayer) {
-        this.numberOfNeuronsInLayer = numberOfNeuronsInLayer;
+        this.numbersOfNeuronsInLayer = numberOfNeuronsInLayer;
     }
 }

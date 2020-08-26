@@ -36,8 +36,7 @@ public class ConsoleHelper {
                 + "numberOfOutputNeurons === " + Gasket.getNumberOfOutputNeurons()
                 + " ----- количество выходных нейронов НН\n"
                 + "numberOfInputNeurons === " + Gasket.getNumberOfInputNeurons()
-                + " ----- количество входных нейронов (стоит соблюдать кратность параметру - всегда квадрат " +
-                        "- количество ячеек матрицы кратно 13)\n"
+                + " ----- количество входных нейронов\n"
                 + "priceChangeToFormHistoryPattern === " + Gasket.getPriceChangeToFormHistoryPattern()
                 + " ----- изменение цены для формирования паттерна истории\n"
                 + "numberOfIndicatorsForOneCandle === " + Gasket.getNumberOfIndicatorsForOneCandle()
@@ -46,6 +45,8 @@ public class ConsoleHelper {
                 + " ----- количество свечек для определения движения buy, sell, flat\n"
                 + "turnOnTurnOffLearning === " + Gasket.isTurnOnTurnOffLearning()
                 + " ----- включить выключить процесс обучения\n"
+                + "learningRate === " + Gasket.getLearningRate()
+                + " ----- шаг обучения\n"
                 + "\n"
                 + "\n"
                 + "dateDifference === " + Gasket.getDateDifference()

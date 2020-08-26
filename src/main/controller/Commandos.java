@@ -2,6 +2,7 @@ package main.controller;
 
 import main.*;
 import main.model.DownloadedData;
+import main.view.ConsoleHelper;
 
 
 public class Commandos {
@@ -26,9 +27,8 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-                if (!Gasket.isTurnOnTurnOffLearning()) {
-                    CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
-                }
+//                if (!Gasket.isTurnOnTurnOffLearning()) {
+                CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
                 Gasket.getViewThread().setColorEducateNN();
             }
         }.start();

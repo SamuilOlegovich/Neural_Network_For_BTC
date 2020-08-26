@@ -73,8 +73,14 @@ public class ExecutorCommandos {
                             + Gasket.getPriceChangeToFormHistoryPattern())
                     );
                     break;
+                case "learningRate" :
+                    Gasket.setLearningRate(Double.parseDouble(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("learningRate === "
+                            + Gasket.getLearningRate())
+                    );
+                    break;
                 case "turnOnTurnOffLearning" :
-                    Gasket.setTurnOnTurnOffLearning(strings[1].equalsIgnoreCase(Enums.TRUE.toString()) ? true : false);
+                    Gasket.setTurnOnTurnOffLearning(strings[1].equalsIgnoreCase(Enums.TRUE.toString()));
                     ConsoleHelper.writeMessage(StringHelper.getString("turnOnTurnOffLearning === "
                             + Gasket.isTurnOnTurnOffLearning())
                     );

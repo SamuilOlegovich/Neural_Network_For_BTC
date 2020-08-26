@@ -7,44 +7,40 @@ import java.util.ArrayList;
 
 
 public class ReadAndWriteNeuralNetworkSetting {
+//    private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private String pathSavedWeights;
     private String pathWeights;
+
 
     public ReadAndWriteNeuralNetworkSetting() {
         this.pathSavedWeights = Gasket.getFilesAndPathCreator().getPathSavedWeights();
         this.pathWeights = Gasket.getFilesAndPathCreator().getPathWeights();
         Gasket.setReadAndWriteNeuralNetworkSetting(this);
-        readFileWeights();
+//        readFileWeights();
     }
-
 
 
 
     // считываем настройки NN
-    protected void readFileWeights() {
+    protected ArrayList<String> readFileWeights() {
+        ArrayList<String> listHistory = null;
         try {
-            ArrayList<String> listHistory =  WriterAndReadFile.readFile(pathSavedWeights);
-
+            listHistory =  new ArrayList<>(WriterAndReadFile.readFile(pathWeights));
             if (listHistory.size() < 1) {
-                ConsoleHelper.writeMessage(StringHelper.getString(Enums.SETTINGS_IN_THE_HISTORY_FILE_NOT_DETECTED));
+                ConsoleHelper.writeMessage(StringHelper.getString(Enums.WEIGHTS_FILE_NOT_DETECTED));
             }
-
-            ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));
-
-            listHistory.remove(0);
-
-            /////////////////////////////////
-//            for (int i = listHistory.size() - 1; i >= 1000; i--) {
-//                listHistory.remove(i);
-//            }
-            /////////////////////////////////
-
-//            findPatterns(listHistory);
-            listHistory.clear();
         } catch (Exception e) {
-            ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_WEIGHTS_FILE));
         }
+        ConsoleHelper.writeMessage(StringHelper.getString(Enums.WEIGHTS_SUCCESSFULLY_READ));
+            /////////////////////////////////
+            for (String s : listHistory) {
+                ConsoleHelper.writeMessage(s);
+            }
+            ////////////////////////////////
+        return listHistory;
     }
+
 
 
     // сохраняем найденые веса после обучения NN
