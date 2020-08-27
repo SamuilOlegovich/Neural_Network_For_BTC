@@ -15,9 +15,12 @@ public class View extends Thread {
     private JButton jButtonEducateNN;
     private JButton jButtonRestoreNN;
     private JScrollPane jScrollPane;
+    private JButton jButtonTestNN;
     private JTextField jTextField;
     private JButton jButtonStart;
     private JButton jButtonStop;
+    private Color color;
+
 
     private JTextArea jTextArea;
     private JButton jButtonSet;
@@ -37,11 +40,13 @@ public class View extends Thread {
         jPanel.setBackground(Color.LIGHT_GRAY);
         jButtonEducateNN = new JButton("EDUCATE NN");
         jButtonRestoreNN = new JButton("RESTORE NN");
+        jButtonTestNN = new JButton("TEST NN");
         jButtonStart = new JButton("START");
         jButtonStop = new JButton("STOP");
 
         jPanel.add(jButtonEducateNN);
         jPanel.add(jButtonRestoreNN);
+        jPanel.add(jButtonTestNN);
         jPanel.add(jButtonStart);
         jPanel.add(jButtonStop);
 
@@ -66,6 +71,7 @@ public class View extends Thread {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // тут прописать старт обучения NN
+                color = jPanel.getBackground();
                 jPanel.setBackground(Color.PINK);
                 Gasket.getCommandos().educate();
             }
@@ -76,8 +82,20 @@ public class View extends Thread {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // тут прописать старт обучения NN
+                color = jPanel.getBackground();
                 jPanel.setBackground(Color.CYAN);
                 Gasket.getCommandos().restore();
+            }
+        });
+
+
+        jButtonTestNN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // тут прописать старт обучения NN
+                color = jPanel.getBackground();
+                jPanel.setBackground(Color.MAGENTA);
+                Gasket.getCommandos().testNN();
             }
         });
 
@@ -87,6 +105,7 @@ public class View extends Thread {
             public void actionPerformed(ActionEvent e) {
 
                 // тут прописать старт программы
+                color = jPanel.getBackground();
                 jPanel.setBackground(Color.GREEN);
 
                 if (runTheProgram != null) {
@@ -105,6 +124,7 @@ public class View extends Thread {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // тут прописать Стоп программы
+                color = jPanel.getBackground();
                 jPanel.setBackground(Color.RED);
 
                 runTheProgram.stopPrograms();
@@ -122,14 +142,14 @@ public class View extends Thread {
                 new Thread() {
                     @Override
                     public void run() {
-                        Color color = jPanel.getBackground();
+                        color = jPanel.getBackground();
                         jPanel.setBackground(Color.yellow);
                         try {
                             Thread.sleep(1000 * 5);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }
-                        jPanel.setBackground(color);
+                        setPreviousColor();
                     }
                 }.start();
 
@@ -193,12 +213,7 @@ public class View extends Thread {
     }
 
 
-    public void setColorEducateNN() {
-        jPanel.setBackground(Color.LIGHT_GRAY);
-    }
-
-
-    public void setColorRestoreNN() {
-        jPanel.setBackground(Color.LIGHT_GRAY);
+    public void setPreviousColor() {
+        jPanel.setBackground(color);
     }
 }

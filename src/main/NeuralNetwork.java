@@ -65,6 +65,7 @@ public class NeuralNetwork {
 
 
 
+    // кормим нейросеит и получаем данные на выходе
     public double[] feedForward(double[] inputs) {
         System.arraycopy(inputs, 0, layers[0].neurons, 0, inputs.length);
         for (int i = 1; i < layers.length; i++)  {
@@ -83,7 +84,7 @@ public class NeuralNetwork {
     }
 
 
-
+    // обратное распространение ошибки (для обучения)
     public void backpropagation(double[] targets) {
         double[] errors = new double[layers[layers.length - 1].size];
         for (int i = 0; i < layers[layers.length - 1].size; i++) {
@@ -153,11 +154,6 @@ public class NeuralNetwork {
         } catch (JsonProcessingException ex) { }
         // удаляем последеий NEXT
         arrayList.remove(arrayList.size() - 1);
-//        ///////////////////////////////
-//            for (String s : arrayList) {
-//                ConsoleHelper.writeMessage(s);
-//            }
-//        ////////////////////////////////
         return arrayList;
     }
 }

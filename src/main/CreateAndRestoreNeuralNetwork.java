@@ -82,6 +82,7 @@ public class CreateAndRestoreNeuralNetwork {
             ID = Integer.parseInt(parseString(Enums.ID, s));
             size = Integer.parseInt(parseString(Enums.SIZE, s));
             nextSize = Integer.parseInt(parseString(Enums.NextSIZE, s));
+            ConsoleHelper.writeMessage(nextSize + "");///////////////////////////////////
 
             String[] biasesParam = parseString(Enums.BIASES, s)
                     .replaceAll("\\[", "").replaceAll("]", "")
@@ -93,12 +94,14 @@ public class CreateAndRestoreNeuralNetwork {
 
             String[] weightsParam = parseString(Enums.WEIGHTS, s).split("],\\[");
             weights = new double[size][nextSize];
-            for (int i = 0; i < weightsParam.length; i++) {
-                String[] outWeightsParam = weightsParam[i]
-                        .replaceAll("\\[", "").replaceAll("]", "")
-                        .split(",");
-                for (int j = 0; j < outWeightsParam.length; j++) {
-                    weights[i][j] = Double.parseDouble(outWeightsParam[j]);
+            if (nextSize != 0) {
+                for (int i = 0; i < weightsParam.length; i++) {
+                    String[] outWeightsParam = weightsParam[i]
+                            .replaceAll("\\[", "").replaceAll("]", "")
+                            .split(",");
+                    for (int j = 0; j < outWeightsParam.length; j++) {
+                        weights[i][j] = Double.parseDouble(outWeightsParam[j]);
+                    }
                 }
             }
 

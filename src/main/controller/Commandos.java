@@ -2,6 +2,7 @@ package main.controller;
 
 import main.*;
 import main.model.DownloadedData;
+import main.model.TesterNN;
 import main.view.ConsoleHelper;
 
 
@@ -17,7 +18,7 @@ public class Commandos {
                     TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
 //            teacherNeuralNetwork.startLearning();
                 }
-                    Gasket.getViewThread().setColorEducateNN();
+                    Gasket.getViewThread().setPreviousColor();
             }
         }.start();
     }
@@ -27,10 +28,22 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-//                if (!Gasket.isTurnOnTurnOffLearning()) {
                 CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
-                Gasket.getViewThread().setColorEducateNN();
+                Gasket.getViewThread().setPreviousColor();
             }
         }.start();
     }
+
+
+    public void testNN() {
+        new Thread() {
+            @Override
+            public void run() {
+                TesterNN testerNN = new TesterNN();
+                Gasket.getViewThread().setPreviousColor();
+            }
+        }.start();
+    }
+
+
 }

@@ -3,8 +3,12 @@ package main;
 public enum Enums {
     THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING,
     ПРОЦЕСС_ОБУЧЕНИЯ_NN_ОКОНЧЕН_СОХРАНЯЮСЬ,
+    THE_NN_TESTING_PROCESS_IS_COMPLETED,
+    ПРОЦЕСС_ТЕСТИРОВАНИЯ_NN_ОКОНЧЕН,
     NN_LEARNING_PROCESS_STARTED,
     СТАРТОВАЛ_ПРОЦЕСС_ОБУЧЕНИЯ_NN,
+    NN_TESTING_PROCESS_STARTED,
+    СТАРТОВАЛ_ПРОЦЕСС_ТЕСТИРОВАНИЯ_NN,
     WEIGHTS_NOT_SAVED,
     ВЕСА_НЕ_СОХРАНИЛИСЬ,
     HISTORY_FILE_NOT_DETECTED,

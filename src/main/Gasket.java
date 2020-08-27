@@ -4,6 +4,7 @@ import main.controller.Commandos;
 import main.controller.RunTheProgram;
 import main.model.DownloadedData;
 import main.model.FilesAndPathCreator;
+import main.model.TesterNN;
 import main.view.View;
 
 public class Gasket {
@@ -16,6 +17,7 @@ public class Gasket {
     private static NeuralNetwork neuralNetwork;
     private static RunTheProgram runTheProgram;
     private static Commandos commandos;
+    private static TesterNN testerNN;
     private static View view;
 
 
@@ -64,6 +66,14 @@ public class Gasket {
 
     public static void setCreateAndRestoreNeuralNetwork(CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork) {
         Gasket.createAndRestoreNeuralNetwork = createAndRestoreNeuralNetwork;
+    }
+
+    public static TesterNN getTesterNN() {
+        return testerNN;
+    }
+
+    public static void setTesterNN(TesterNN testerNN) {
+        Gasket.testerNN = testerNN;
     }
 
     public static Commandos getCommandos() {

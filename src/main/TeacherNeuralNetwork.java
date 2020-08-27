@@ -78,19 +78,20 @@ public class TeacherNeuralNetwork {
 
     private void digits() {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED));
+
         for (int i = 1; i < epochs; i++) {
             int right = 0;
             double errorSum = 0;
             int batchSize = 100;
 
-            for (int j = 0; j < batchSize; j++) {
-                int imgIndex = (int)(Math.random() * samples);
+            for (int j = 0; j < samples; j++) {
+//                int imgIndex = (int)(Math.random() * samples);
 //                double[] targets = new double[10];
                 double[] targets = new double[numberOfOutputNeurons];
-                int digit = digits[imgIndex];
+                int digit = digits[j];
                 targets[digit] = 1;
 
-                double[] outputs = nn.feedForward(inputs[imgIndex]);
+                double[] outputs = nn.feedForward(inputs[j]);
                 int maxDigit = 0;
                 double maxDigitWeight = -1;
 
@@ -123,6 +124,54 @@ public class TeacherNeuralNetwork {
 
 
 
+//    private void digits() {
+//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED));
+//
+//        for (int i = 1; i < epochs; i++) {
+//            int right = 0;
+//            double errorSum = 0;
+//            int batchSize = 100;
+//
+//            for (int j = 0; j < batchSize; j++) {
+//                int imgIndex = (int)(Math.random() * samples);
+////                double[] targets = new double[10];
+//                double[] targets = new double[numberOfOutputNeurons];
+//                int digit = digits[imgIndex];
+//                targets[digit] = 1;
+//
+//                double[] outputs = nn.feedForward(inputs[imgIndex]);
+//                int maxDigit = 0;
+//                double maxDigitWeight = -1;
+//
+////                for (int k = 0; k < 10; k++) {
+//                for (int k = 0; k < numberOfOutputNeurons; k++) {
+//                    if (outputs[k] > maxDigitWeight) {
+//                        maxDigitWeight = outputs[k];
+//                        maxDigit = k;
+//                    }
+//                }
+//
+//                if (digit == maxDigit) right++;
+//
+////                for (int k = 0; k < 10; k++) {
+//                for (int k = 0; k < numberOfOutputNeurons; k++) {
+//                    errorSum += (targets[k] - outputs[k]) * (targets[k] - outputs[k]);
+//                }
+//                nn.backpropagation(targets);
+//            }
+//
+//            if (Gasket.isWhetherOrNotShowLearningProcess()) {
+//                ConsoleHelper.writeMessage(StringHelper.getString("epoch: " + i + ". correct: " + right
+//                        + ". error: " + errorSum));
+//            }
+//        }
+//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.
+//                THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING));
+//        keepTheNumberOfNeuronsInTheLayer();
+//    }
+
+
+
     // сохранить количество нейронов в слое
     private void keepTheNumberOfNeuronsInTheLayer() {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -134,13 +183,13 @@ public class TeacherNeuralNetwork {
 
         arrayList.add("\n" + Enums.NEXT.toString() + "\n");
         arrayList.addAll(nn.saveBalanceData());
-//        ///////////////////////////////
-//            for (String s : arrayList) {
-//                ConsoleHelper.writeMessage(s);
-//            }
-//        ////////////////////////////////
         Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList);
     }
+
+
+
+
+
 
 
 
