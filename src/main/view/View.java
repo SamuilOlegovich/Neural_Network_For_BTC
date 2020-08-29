@@ -145,7 +145,7 @@ public class View extends Thread {
                         color = jPanel.getBackground();
                         jPanel.setBackground(Color.yellow);
                         try {
-                            Thread.sleep(1000 * 5);
+                            Thread.sleep(1000 * 2);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }

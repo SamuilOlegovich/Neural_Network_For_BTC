@@ -82,7 +82,7 @@ public class CreateAndRestoreNeuralNetwork {
             ID = Integer.parseInt(parseString(Enums.ID, s));
             size = Integer.parseInt(parseString(Enums.SIZE, s));
             nextSize = Integer.parseInt(parseString(Enums.NextSIZE, s));
-            ConsoleHelper.writeMessage(nextSize + "");///////////////////////////////////
+//            ConsoleHelper.writeMessage(nextSize + "");///////////////////////////////////
 
             String[] biasesParam = parseString(Enums.BIASES, s)
                     .replaceAll("\\[", "").replaceAll("]", "")

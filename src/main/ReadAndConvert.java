@@ -6,6 +6,9 @@ import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
 
+
+
+
 public class ReadAndConvert {
     private TransformerHistory transformerHistory;
     private DownloadedData downloadedData;
@@ -39,7 +42,6 @@ public class ReadAndConvert {
 
             if (listHistory.size() < 1) {
                 ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_FILE_NOT_DETECTED));
-//                throw new Exception();
             }
             listHistory.remove(0);
             ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_SUCCESSFULLY_READ));

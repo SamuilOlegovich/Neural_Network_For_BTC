@@ -84,8 +84,8 @@ public class TeacherNeuralNetwork {
             double errorSum = 0;
             int batchSize = 100;
 
-            for (int j = 0; j < samples; j++) {
-//                int imgIndex = (int)(Math.random() * samples);
+            for (int j = 0; j < batchSize; j++) {
+                int imgIndex = (int)(Math.random() * samples);
 //                double[] targets = new double[10];
                 double[] targets = new double[numberOfOutputNeurons];
                 int digit = digits[j];
