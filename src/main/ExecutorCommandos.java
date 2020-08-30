@@ -79,6 +79,18 @@ public class ExecutorCommandos {
                             + Gasket.getLearningRate())
                     );
                     break;
+                case "minDigitWeightForBuy" :
+                    Gasket.setMinDigitWeightForBuy(Double.parseDouble(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("minDigitWeightForBuy === "
+                            + Gasket.getMinDigitWeightForBuy())
+                    );
+                    break;
+                case "minDigitWeightForSell" :
+                    Gasket.setMinDigitWeightForSell(Double.parseDouble(strings[1]));
+                    ConsoleHelper.writeMessage(StringHelper.getString("minDigitWeightForSell === "
+                            + Gasket.getMinDigitWeightForSell())
+                    );
+                    break;
                 case "turnOnTurnOffLearning" :
                     Gasket.setTurnOnTurnOffLearning(strings[1].equalsIgnoreCase(Enums.TRUE.toString()));
                     ConsoleHelper.writeMessage(StringHelper.getString("turnOnTurnOffLearning === "

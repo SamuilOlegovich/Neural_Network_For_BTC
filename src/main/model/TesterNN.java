@@ -43,9 +43,6 @@ public class TesterNN {
         int flatGood = 0;
         int flatBad = 0;
 
-//        int right = 0;
-//        double errorSum = 0;
-//        int batchSize = 100;
 
         for (int a = 0; a < repliesForNN.length; a++) {
             int imgIndex = a;
@@ -56,8 +53,8 @@ public class TesterNN {
             targets[digit] = 1;
             int maxDigit = 0;           // номер в массиве где находится самые большие веса
             double maxDigitWeight = -1;
-            double minDigitWeightForBuy = 0.5;
-            double minDigitWeightForSell = 0.35;
+            double minDigitWeightForBuy = Gasket.getMinDigitWeightForBuy();
+            double minDigitWeightForSell = Gasket.getMinDigitWeightForSell();
             double[] outputs = nn.feedForward(dataForNN[imgIndex]);
 
             for (int i = 0; i < outputs.length; i++) {

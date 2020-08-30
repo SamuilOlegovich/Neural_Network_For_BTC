@@ -47,6 +47,10 @@ public class ConsoleHelper {
                 + " ----- включить выключить процесс обучения\n"
                 + "learningRate === " + Gasket.getLearningRate()
                 + " ----- шаг обучения\n"
+                + "minDigitWeightForSell === " + Gasket.getMinDigitWeightForSell()
+                + " ----- минимальный порог для принятия решения по Селл\n"
+                + "minDigitWeightForBuy === " + Gasket.getMinDigitWeightForBuy()
+                + " ----- минимальный порог для принятия решения по Бай\n"
                 + "\n"
                 + "\n"
                 + "dateDifference === " + Gasket.getDateDifference()

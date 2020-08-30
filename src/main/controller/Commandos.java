@@ -28,7 +28,8 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-                CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork = new CreateAndRestoreNeuralNetwork();
+//                CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork =
+                        new CreateAndRestoreNeuralNetwork();
                 Gasket.getViewThread().setPreviousColor();
             }
         }.start();
@@ -39,7 +40,8 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-                TesterNN testerNN = new TesterNN();
+//                TesterNN testerNN =
+                        new TesterNN();
                 Gasket.getViewThread().setPreviousColor();
             }
         }.start();

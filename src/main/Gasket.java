@@ -33,6 +33,10 @@ public class Gasket {
     private static int dateDifference = -3;                             // разница в часовом поясе
 
 
+    private static double minDigitWeightForSell = 0.35;
+    private static double minDigitWeightForBuy = 0.5;
+
+
     private static final String SETTING_NOW = " --- SETTING_NOW --- ";
     private static final String LEARNING_PROCESS_HAS_STARTED_NN = " ----- СТАРТОВАЛ процесс обучения NN";
 
@@ -51,6 +55,21 @@ public class Gasket {
         return LEARNING_PROCESS_HAS_STARTED_NN;
     }
 
+    public static double getMinDigitWeightForSell() {
+        return minDigitWeightForSell;
+    }
+
+    public static void setMinDigitWeightForSell(double minDigitWeightForSell) {
+        Gasket.minDigitWeightForSell = minDigitWeightForSell;
+    }
+
+    public static double getMinDigitWeightForBuy() {
+        return minDigitWeightForBuy;
+    }
+
+    public static void setMinDigitWeightForBuy(double minDigitWeightForBuy) {
+        Gasket.minDigitWeightForBuy = minDigitWeightForBuy;
+    }
 
     public static double getLearningRate() {
         return learningRate;
