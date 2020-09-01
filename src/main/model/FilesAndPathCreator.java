@@ -1,7 +1,6 @@
 package main.model;
 
 import main.Gasket;
-import main.model.DatesTimes;
 import main.view.ConsoleHelper;
 
 import java.io.IOException;
@@ -27,6 +26,8 @@ public class FilesAndPathCreator {
 //    private String pathPatternsDelete;
 //    private String pathPatternsIIPro;
 
+    private String pathHistoryForFortuneteller;
+    private String pathSavedWeightsPredictor;
     private String pathSavedWeights;
     private String pathSettings;
     private String pathWeights;
@@ -81,11 +82,11 @@ public class FilesAndPathCreator {
 //                    }
 //                }
 
-//                Path pathIIPatterns = Paths.get(finish + "iiPatterns");
+//                Path historyForFortuneteller = Paths.get(finish + "HistoryForFortuneteller");
 //
-//                if (!Files.exists(pathIIPatterns)) {
+//                if (!Files.exists(historyForFortuneteller)) {
 //                    try {
-//                        Files.createDirectories(Paths.get("iiPatterns"));
+//                        Files.createDirectories(Paths.get("HistoryForFortuneteller"));
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    }
@@ -149,6 +150,8 @@ public class FilesAndPathCreator {
 
                 pathLogs = finish  + "Logs\\" + DatesTimes.getDateLogs().replaceAll(":", "-")
                         + " Log.txt";
+                pathHistoryForFortuneteller = finish + "History\\HistoryForFortuneteller.txt";
+                pathSavedWeightsPredictor = finish + "Weights\\SavedWeightsPredictor.txt";
                 pathSavedWeights = finish + "Weights\\SavedWeights.txt";
                 pathSettings = finish + "Settings\\Settings.txt";
                 pathHistory = finish + "History\\History.txt";
@@ -251,6 +254,8 @@ public class FilesAndPathCreator {
 //                pathPatternsForUser = finish + "uPatterns/iiPatternsFor.txt";
 
                 pathLogs = finish + "Logs/" + DatesTimes.getDateLogs() + " Log.txt";
+                pathHistoryForFortuneteller = finish + "History/HistoryForFortuneteller.txt";
+                pathSavedWeightsPredictor = finish + "Weights/SavedWeightsPredictor.txt";
                 pathSavedWeights = finish + "Weights/SavedWeights.txt";
                 pathHistory = finish + "History/History.txt";
                 pathSettings = finish + "Settings/Settings.txt";
@@ -275,6 +280,8 @@ public class FilesAndPathCreator {
 //            pathPatternsDelete = string + "Logs/Patterns/TemporaryDelete.txt";
 
             pathLogs = string + "Logs/Log/" + DatesTimes.getDateLogs() + "===Log.txt";
+            pathHistoryForFortuneteller = string + "Logs/History/HistoryForFortuneteller.txt";
+            pathSavedWeightsPredictor = string + "Logs/Weights/SavedWeightsPredictor.txt";
             pathSavedWeights = string + "Logs/Weights/SavedWeights.txt";
             pathWeights = string + "Logs/Weights/Weights.txt";
             pathHistory = string + "Logs/History/History.txt";
@@ -317,11 +324,18 @@ public class FilesAndPathCreator {
 //
 //            pathPatternsIIPro = pathPatternsIIPro
 //                    .replaceFirst("/", "").replaceAll("/", "\\\\");
+//
+//
+            pathHistoryForFortuneteller = pathHistoryForFortuneteller
+                    .replaceFirst("/", "").replaceAll("/", "\\\\");
 
             pathWeights = pathWeights
                     .replaceFirst("/", "").replaceAll("/", "\\\\");
 
             pathSavedWeights = pathSavedWeights
+                    .replaceFirst("/", "").replaceAll("/", "\\\\");
+
+            pathSavedWeightsPredictor = pathSavedWeightsPredictor
                     .replaceFirst("/", "").replaceAll("/", "\\\\");
 
             pathSettings = pathSettings
@@ -351,6 +365,8 @@ public class FilesAndPathCreator {
 //        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsDelete);
 //        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathPatternsIIPro);
 
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathHistoryForFortuneteller);
+        ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathSavedWeightsPredictor);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathSavedWeights);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathSettings);
         ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- " + pathWeights);
@@ -408,6 +424,14 @@ public class FilesAndPathCreator {
 //        if (!Files.exists(Paths.get(pathPatternsIIPro))) {
 //            createdFilePatternsIIPro();
 //        }
+//
+        if (!Files.exists(Paths.get(pathHistoryForFortuneteller))) {
+            createdHistoryForFortuneteller();
+        }
+
+        if (!Files.exists(Paths.get(pathSavedWeightsPredictor))) {
+            createdFileSavedWeightsPredictor();
+        }
 
         if (!Files.exists(Paths.get(pathSavedWeights))) {
             createdFileSavedWeights();
@@ -466,6 +490,19 @@ public class FilesAndPathCreator {
 //                    + "Не удалось создать файл PureHistoryOfPatternsIn.");
 //        }
 //    }
+//
+//
+    private void createdHistoryForFortuneteller() {
+        File file = new File(pathHistoryForFortuneteller);
+        try {
+            boolean newFile = file.createNewFile();
+            ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
+                    + "Новый файл HistoryForFortuneteller успешно создан.");
+        } catch (IOException ex) {
+            ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
+                    + "Не удалось создать файл HistoryForFortuneteller.");
+        }
+    }
 
 
 
@@ -508,6 +545,20 @@ public class FilesAndPathCreator {
                     + "Не удалось создать файл SavedWeights.");
         }
     }
+
+
+    private void createdFileSavedWeightsPredictor() {
+        File file = new File(pathSavedWeightsPredictor);
+        try {
+            boolean newFile = file.createNewFile();
+            ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
+                    + "Новый файл для SavedWeightsPredictor успешно создан.");
+        } catch (IOException ex) {
+            ConsoleHelper.writeMessage(DatesTimes.getDateTerminal() + " --- "
+                    + "Не удалось создать файл SavedWeightsPredictor.");
+        }
+    }
+
 
     private void createdFileHistory() {
         File file = new File(pathHistory);
@@ -681,6 +732,10 @@ public class FilesAndPathCreator {
         return pathSavedWeights;
     }
 
+    public String getPathSavedWeightsPredictor() {
+        return pathSavedWeightsPredictor;
+    }
+
     public String getPathHistory() {
         return pathHistory;
     }
@@ -693,7 +748,11 @@ public class FilesAndPathCreator {
         return pathWeights;
     }
 
-//    public String getPathPatternsTemporaryIIPro() {
+    public String getPathHistoryForFortuneteller() {
+        return pathHistoryForFortuneteller;
+    }
+
+    //    public String getPathPatternsTemporaryIIPro() {
 //        return pathPatternsTemporaryIIPro;
 //    }
 //

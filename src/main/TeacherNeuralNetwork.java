@@ -20,6 +20,8 @@ public class TeacherNeuralNetwork {
     @JsonIgnore
     private double[][] inputs;                   // паттерны
     @JsonIgnore
+    private boolean predictNo;                   // прогнозировать или нет
+    @JsonIgnore
     private NeuralNetwork nn;
     @JsonIgnore
     private int[] digits;                        // для ответов к паттенам
@@ -44,6 +46,24 @@ public class TeacherNeuralNetwork {
         this.learningRate = Gasket.getLearningRate();
         this.sigmoid = x -> 1 / (1 + Math.exp(-x));
         this.dsigmoid = y -> y * (1 - y);
+        this.predictNo = false;
+        this.nn = createNeuralNetwork();
+        Gasket.setTeacherNeuralNetwork(this);
+        Gasket.setNeuralNetwork(nn);
+        digits();
+    }
+
+    public TeacherNeuralNetwork(boolean b) {
+        this.numberOfSensoryNeurons = Gasket.getDownloadedData().getNumberOfSensoryNeurons();
+        this.samples = Gasket.getDownloadedData().getSizeDownloadedDataList();
+        this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
+        this.digits = Gasket.getDownloadedData().getRepliesForNN();
+        this.inputs = Gasket.getDownloadedData().getDataForNN();
+        this.epochs = Gasket.getNumberOfTrainingCycles();
+        this.learningRate = Gasket.getLearningRate();
+        this.sigmoid = x -> 1 / (1 + Math.exp(-x));
+        this.dsigmoid = y -> y * (1 - y);
+        this.predictNo = b;
         this.nn = createNeuralNetwork();
         Gasket.setTeacherNeuralNetwork(this);
         Gasket.setNeuralNetwork(nn);
@@ -52,27 +72,35 @@ public class TeacherNeuralNetwork {
 
 
     private NeuralNetwork createNeuralNetwork() {
-        numbersOfNeuronsInLayer = new int[6];
-        numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
-        numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
-        numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
-        numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
-        numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
-        numbersOfNeuronsInLayer[5] = 3;
-
+        if (predictNo) {
+            numbersOfNeuronsInLayer = new int[5];
+            numbersOfNeuronsInLayer[0] = 3;
+            numbersOfNeuronsInLayer[1] = 6;
+            numbersOfNeuronsInLayer[2] = 6;
+            numbersOfNeuronsInLayer[3] = 4;
+            numbersOfNeuronsInLayer[4] = 2;
+        } else {
+            numbersOfNeuronsInLayer = new int[6];
+            numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
+            numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
+            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
+            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
+            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
+            numbersOfNeuronsInLayer[5] = 3;
+        }
         return new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer);
     }
 
 
 
 
-    public boolean startLearning() {
-        digits();
-        ConsoleHelper.writeMessage("Хух! НАУЧИЛСЯ!");
-        FormDigits f = new FormDigits(nn);
-        new Thread(f).start();
-        return true;
-    }
+//    public boolean startLearning() {
+//        digits();
+//        ConsoleHelper.writeMessage("Хух! НАУЧИЛСЯ!");
+//        FormDigits f = new FormDigits(nn);
+//        new Thread(f).start();
+//        return true;
+//    }
 
 
 
@@ -183,7 +211,7 @@ public class TeacherNeuralNetwork {
 
         arrayList.add("\n" + Enums.NEXT.toString() + "\n");
         arrayList.addAll(nn.saveBalanceData());
-        Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList);
+        Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList, predictNo);
     }
 
 

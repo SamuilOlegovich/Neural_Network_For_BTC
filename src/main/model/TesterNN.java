@@ -10,30 +10,48 @@ import java.util.ArrayList;
 
 
 public class TesterNN {
-    private ArrayList<String> downloadedDataList;   // массив полученых строк, в каждой строке по 117 свечей (одна строка один паттерн)
+    private ArrayList<String> downloadedDataList;       // массив полученых строк, в каждой строке по ... свечей (одна строка один паттерн)
+    private ArrayList<String> dataForNextNN;            // данные для следующей сети предсказателя
     private int sizeDownloadedDataList;
     private int numberOfOutputNeurons;
     private int numberOfInputNeurons;               // количество входных нейронов
-    private double[] dataForNextNN;                 // данные для следующей сети предсказателя
     private double[][] dataForNN;                   // готовые данные для НН
     private int[] repliesForNN;                     // ответы по данным для НН
     private NeuralNetwork nn;
+    private boolean flag;
 
 
     public TesterNN() {
-        this.dataForNextNN = new double[Gasket.getNumberOfOutputNeurons() + 1];
+//        this.dataForNextNN = new double[Gasket.getNumberOfOutputNeurons() + 1];
         this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
         this.downloadedDataList = new ArrayList<>();
+        this.dataForNextNN = new ArrayList<>();
         this.nn = Gasket.getNeuralNetwork();
         Gasket.setTesterNN(this);
         new ReadAndConvert(true);
+        this.flag = false;
         testStart();
     }
 
+    public TesterNN(boolean b) {
+//        this.dataForNextNN = new double[Gasket.getNumberOfOutputNeurons() + 1];
+        this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
+        this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
+        this.downloadedDataList = new ArrayList<>();
+        this.dataForNextNN = new ArrayList<>();
+        this.nn = Gasket.getNeuralNetwork();
+        Gasket.setTesterNN(this);
+        new ReadAndConvert(true);
+        this.flag = b;
+        testStart();
+    }
+
+    // доделать вторую нейро сеть и сравнение
+
 
     private void testStart() {
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_TESTING_PROCESS_STARTED));
+        if (flag) ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_TESTING_PROCESS_STARTED));
         int buyGood = 0;
         int buyBad = 0;
         int dB = 0;
@@ -64,38 +82,56 @@ public class TesterNN {
                 }
             }
 
-            dataForNextNN[0] = digit;
-            for (int i = 0; i < outputs.length; i++) {
-                dataForNextNN[i + 1] = outputs[i];
+
+
+
+            if (flag) {
+                if (digit == maxDigit && digit == 1 && maxDigitWeight > minDigitWeightForBuy) {
+                    buyGood++;
+                } else if (digit != maxDigit && digit == 1) {
+                    if (maxDigit == 0) dB++;
+                    buyBad++;
+                } else if (digit == maxDigit && digit == 2 && maxDigitWeight > minDigitWeightForBuy) {
+                    sellGood++;
+                } else if (digit != maxDigit && digit == 2) {
+                    if (maxDigit == 0) dS++;
+                    sellBad++;
+                } else if (digit == maxDigit && digit == 0) {
+                    flatGood++;
+                } else if (digit != maxDigit && digit == 0) {
+                    flatBad++;
+                }
             }
 
 
-            if (digit == maxDigit && digit == 1 && maxDigitWeight > minDigitWeightForBuy) {
-                buyGood++;
-            } else if (digit != maxDigit && digit == 1  && maxDigitWeight > minDigitWeightForBuy) {
-                if (maxDigit == 0) dB++;
-                buyBad++;
-            } else if (digit == maxDigit && digit == 2) {
-                sellGood++;
-            } else if (digit != maxDigit && digit == 2) {
-                if (maxDigit == 0) dS++;
-                sellBad++;
-            } else if (digit == maxDigit && digit == 0) {
-                flatGood++;
-            } else if (digit != maxDigit && digit == 0) {
-                flatBad++;
+            // заполняем данные для сети предсказателя
+            if (!flag) {
+                StringBuilder outForList = new StringBuilder();
+                if (digit == maxDigit) outForList.append(1 + ";");
+                else outForList.append(0 + ";");
+                for (int i = 0; i < outputs.length; i++) {
+                    if (i != outputs.length - 1) {
+                        outForList.append(outputs[i]).append(";");
+                    } else {
+                        outForList.append(outputs[i]);
+                    }
+                }
+                dataForNextNN.add(outForList.toString());
             }
         }
 
-        ConsoleHelper.writeMessage("\n"
-                + "   === STATISTIC ===   " + "\n"
-                + buyGood + " === " + buyBad + " === " + dB + "\n"
-                + sellGood + " === " + sellBad + " === " + dS + "\n"
-                + flatGood + " === " + flatBad + "\n"
-        );
+        if (flag) {
+            ConsoleHelper.writeMessage("\n"
+                    + "   === STATISTIC ===   " + "\n"
+                    + buyGood + " === " + buyBad + " === " + dB + "\n"
+                    + sellGood + " === " + sellBad + " === " + dS + "\n"
+                    + flatGood + " === " + flatBad + "\n"
+            );
+        }
 
+        if (!flag) saveTestResults();
 
-        ConsoleHelper.writeMessage(StringHelper.getString(Enums.
+        if (flag) ConsoleHelper.writeMessage(StringHelper.getString(Enums.
                 THE_NN_TESTING_PROCESS_IS_COMPLETED));
     }
 
@@ -146,5 +182,11 @@ public class TesterNN {
 
     public void addDownloadedList(String s) {
         downloadedDataList.add(s);
+    }
+
+
+    private void saveTestResults() {
+        Gasket.getReadAndWriteNeuralNetworkSetting().saveHistoryForFortuneteller(dataForNextNN,
+                Gasket.getFilesAndPathCreator().getPathHistoryForFortuneteller());
     }
 }

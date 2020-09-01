@@ -13,10 +13,11 @@ public class Commandos {
             @Override
             public void run() {
                 if (Gasket.isTurnOnTurnOffLearning()) {
-                    DownloadedData downloadedData = new DownloadedData();
-                    ReadAndConvert readAndConvert = new ReadAndConvert();
-                    TeacherNeuralNetwork teacherNeuralNetwork = new TeacherNeuralNetwork();
+                    new DownloadedData();
+                    new ReadAndConvert();
+                    new TeacherNeuralNetwork();
 //            teacherNeuralNetwork.startLearning();
+                    new TesterNN();
                 }
                     Gasket.getViewThread().setPreviousColor();
             }
@@ -41,7 +42,7 @@ public class Commandos {
             @Override
             public void run() {
 //                TesterNN testerNN =
-                        new TesterNN();
+                        new TesterNN(true);
                 Gasket.getViewThread().setPreviousColor();
             }
         }.start();

@@ -97,6 +97,12 @@ public class ExecutorCommandos {
                             + Gasket.isTurnOnTurnOffLearning())
                     );
                     break;
+                case "predictNextCandle" :
+                    Gasket.setPredictNextCandle(strings[1].equalsIgnoreCase(Enums.TRUE.toString()));
+                    ConsoleHelper.writeMessage(StringHelper.getString("predictNextCandle === "
+                            + Gasket.isPredictNextCandle())
+                    );
+                    break;
                 case "numberOfCandlesToDetectMovement" :
                     Gasket.setNumberOfCandlesToDetectMovement(Integer.parseInt(strings[1]));
                     ConsoleHelper.writeMessage(StringHelper.getString("numberOfCandlesToDetectMovement === "

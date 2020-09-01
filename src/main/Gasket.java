@@ -13,6 +13,7 @@ public class Gasket {
     private static TeacherNeuralNetwork teacherNeuralNetwork;
     private static FilesAndPathCreator filesAndPathCreator;
     private static ExecutorCommandos executorCommandos;
+    private static NeuralNetwork neuralNetworkTow;
     private static DownloadedData downloadedData;
     private static NeuralNetwork neuralNetwork;
     private static RunTheProgram runTheProgram;
@@ -26,6 +27,7 @@ public class Gasket {
     private static int numberOfIndicatorsForOneCandle = 13;             // количество показателей по одной свече
     private static int numberOfCandlesToDetectMovement = 5;             // количество свечек для определения движения buy, sell, flat
     private static boolean turnOnTurnOffLearning = true;                // включить выключить процесс обучения
+    private static boolean predictNextCandle = true;
     private static int numberOfTrainingCycles = 10;
     private static int numberOfInputNeurons = 1300;
     private static int numberOfOutputNeurons = 3;
@@ -53,6 +55,23 @@ public class Gasket {
 
     public static String getLearningProcessHasStarted() {
         return LEARNING_PROCESS_HAS_STARTED_NN;
+    }
+
+
+    public static NeuralNetwork getNeuralNetworkTow() {
+        return neuralNetworkTow;
+    }
+
+    public static void setNeuralNetworkTow(NeuralNetwork neuralNetworkTow) {
+        Gasket.neuralNetworkTow = neuralNetworkTow;
+    }
+
+    public static boolean isPredictNextCandle() {
+        return predictNextCandle;
+    }
+
+    public static void setPredictNextCandle(boolean predictNextCandle) {
+        Gasket.predictNextCandle = predictNextCandle;
     }
 
     public static double getMinDigitWeightForSell() {

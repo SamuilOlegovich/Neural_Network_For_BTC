@@ -51,6 +51,8 @@ public class ConsoleHelper {
                 + " ----- минимальный порог для принятия решения по Селл\n"
                 + "minDigitWeightForBuy === " + Gasket.getMinDigitWeightForBuy()
                 + " ----- минимальный порог для принятия решения по Бай\n"
+                + "predictNextCandle === " + Gasket.isPredictNextCandle()
+                + " ----- предсказать следующую свечку\n"
                 + "\n"
                 + "\n"
                 + "dateDifference === " + Gasket.getDateDifference()

@@ -41,24 +41,38 @@ public class StringHelper {
 
 
 
-    // DATE_TIME;OPEN;HIGH;LOW;CLOSE;VOLUME
-    //22.07.2020 0:00:00;9393,5;9398,0;9393,0;9394,0;4808147
-    //22.07.2020 0:01:00;9394,0;9394,5;9389,5;9390,0;2206761
-    //22.07.2020 0:02:00;9390,0;9392,0;9388,5;9391,5;1017803
-    //22.07.2020 0:03:00;9391,5;9392,0;9391,5;9391,5;1142942
+
     public static synchronized double getDataHistory(Enums e, String in) {
         String[] strings = in.replaceAll(",", ".").split(";");
 
-        if (e.equals(Enums.OPEN)) {
-            return Double.parseDouble(strings[1]);
-        } else if (e.equals(Enums.HIGH)) {
-            return Double.parseDouble(strings[2]);
-        } else if (e.equals(Enums.LOW)) {
-            return Double.parseDouble(strings[3]);
-        } else if (e.equals(Enums.CLOSE)) {
-            return Double.parseDouble(strings[4]);
-        } else if (e.equals(Enums.VOLUME)) {
-            return Double.parseDouble(strings[5]);
+        // DATE_TIME;OPEN;HIGH;LOW;CLOSE;VOLUME
+        //22.07.2020 0:00:00;9393,5;9398,0;9393,0;9394,0;4808147
+        if (strings.length == 6) {
+            if (e.equals(Enums.OPEN)) {
+                return Double.parseDouble(strings[1]);
+            } else if (e.equals(Enums.HIGH)) {
+                return Double.parseDouble(strings[2]);
+            } else if (e.equals(Enums.LOW)) {
+                return Double.parseDouble(strings[3]);
+            } else if (e.equals(Enums.CLOSE)) {
+                return Double.parseDouble(strings[4]);
+            } else if (e.equals(Enums.VOLUME)) {
+                return Double.parseDouble(strings[5]);
+            }
+        } else {
+            // <DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>
+            // 20190731;000000;9543.9600000;9552.3800000;9519.8300000;9530.3900000;29
+            if (e.equals(Enums.OPEN)) {
+                return Double.parseDouble(strings[2]);
+            } else if (e.equals(Enums.HIGH)) {
+                return Double.parseDouble(strings[3]);
+            } else if (e.equals(Enums.LOW)) {
+                return Double.parseDouble(strings[4]);
+            } else if (e.equals(Enums.CLOSE)) {
+                return Double.parseDouble(strings[5]);
+            } else if (e.equals(Enums.VOLUME)) {
+                return Double.parseDouble(strings[6]);
+            }
         }
         return 0.0;
     }

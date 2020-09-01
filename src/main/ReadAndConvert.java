@@ -79,45 +79,80 @@ public class ReadAndConvert {
     private void findPatterns(ArrayList<String> in) {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
 
-        for (int a = 1; a < ((in.size() - (Gasket.getNumberOfInputNeurons()
-                / Gasket.getNumberOfIndicatorsForOneCandle())) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
-            ArrayList<String> outList = new ArrayList<>();
-            int finish = 0;
+        if (Gasket.isPredictNextCandle()) {
+            for (int a = 1; a < ((in.size() - (Gasket.getNumberOfInputNeurons()
+                    / Gasket.getNumberOfIndicatorsForOneCandle()))
+                    - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
+                ArrayList<String> outList = new ArrayList<>();
+                int finish = 0;
 
-            for (int i = a - 1; i < (a + (Gasket.getNumberOfInputNeurons()
-                    / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
-                outList.add(in.get(i));
-                finish = i;
-            }
+                for (int i = a - 1; i < (a + (Gasket.getNumberOfInputNeurons()
+                        / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
+                    outList.add(in.get(i));
+                    finish = i;
+                }
+                finish++;
 
-            double finishCloseSell = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
-                    - Gasket.getPriceChangeToFormHistoryPattern();
-            double finishCloseBuy = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
-                    + Gasket.getPriceChangeToFormHistoryPattern();
-            int sizeListOut = outList.size();
-            finish++;
-
-            for (int i = finish; i <= finish; i++) {
-                String s = in.get(i);
+                String s = in.get(finish);
                 double close = StringHelper.getDataHistory(Enums.CLOSE, s);
-                double high = StringHelper.getDataHistory(Enums.HIGH, s);
                 double open = StringHelper.getDataHistory(Enums.OPEN, s);
-                double low = StringHelper.getDataHistory(Enums.LOW, s);
 
                 if (open < close) {
                     outList.add(0, Enums.BUY.toString());
-                    break;
                 } else if (open > close) {
                     outList.add(0, Enums.SELL.toString());
-                    break;
                 } else {
                     outList.add(0, Enums.FLAT.toString());
                 }
-            }
 
-            // конвертируем паттерны и наполняем входящий лист строками для обучения NN
-            convertHistory(outList);
+                // конвертируем паттерны и наполняем входящий лист строками для обучения NN
+                convertHistory(outList);
+            }
+        } else {
+
+            // перебираем входящий список
+            for (int a = 1; a < ((in.size() - (Gasket.getNumberOfInputNeurons()
+                    / Gasket.getNumberOfIndicatorsForOneCandle()))
+                    - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
+                ArrayList<String> outList = new ArrayList<>();
+                int finish = 0;
+
+                for (int i = a - 1; i < (a + (Gasket.getNumberOfInputNeurons()
+                        / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
+                    outList.add(in.get(i));
+                    finish = i;
+                }
+
+                double finishCloseSell = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
+                        - Gasket.getPriceChangeToFormHistoryPattern();
+                double finishCloseBuy = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
+                        + Gasket.getPriceChangeToFormHistoryPattern();
+                int sizeListOut = outList.size();
+                finish++;
+
+                for (int i = finish; i < finish + Gasket.getNumberOfCandlesToDetectMovement(); i++) {
+                    String s = in.get(i);
+                    double close = StringHelper.getDataHistory(Enums.CLOSE, s);
+                    double high = StringHelper.getDataHistory(Enums.HIGH, s);
+                    double low = StringHelper.getDataHistory(Enums.LOW, s);
+
+                    if (finishCloseBuy < close || finishCloseBuy < high) {
+                        outList.add(0, Enums.BUY.toString());
+                        break;
+                    } else if (finishCloseSell > close || finishCloseSell > low) {
+                        outList.add(0, Enums.SELL.toString());
+                        break;
+                    }
+                }
+
+                if (outList.size() == sizeListOut) {
+                    outList.add(0, Enums.FLAT.toString());
+                }
+                // конвертируем паттерны и наполняем входящий лист строками для обучения NN
+                convertHistory(outList);
+            }
         }
+
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_CONVERSION_OVER));
         // формируем марицу для обучения
         if (forTestedNN) {
@@ -126,57 +161,4 @@ public class ReadAndConvert {
             downloadedData.fillMatrixArray();
         }
     }
-
-
-//    // находим паттерны
-//    private void findPatterns(ArrayList<String> in) {
-//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
-//
-//        for (int a = 1; a < ((in.size() - (Gasket.getNumberOfInputNeurons()
-//                / Gasket.getNumberOfIndicatorsForOneCandle())) - Gasket.getNumberOfCandlesToDetectMovement()); a++) {
-//            ArrayList<String> outList = new ArrayList<>();
-//            int finish = 0;
-//
-//            for (int i = a - 1; i < (a + (Gasket.getNumberOfInputNeurons()
-//                    / Gasket.getNumberOfIndicatorsForOneCandle())); i++) {
-//                outList.add(in.get(i));
-//                finish = i;
-//            }
-//
-//            double finishCloseSell = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
-//                    - Gasket.getPriceChangeToFormHistoryPattern();
-//            double finishCloseBuy = StringHelper.getDataHistory(Enums.CLOSE, in.get(finish))
-//                    + Gasket.getPriceChangeToFormHistoryPattern();
-//            int sizeListOut = outList.size();
-//            finish++;
-//
-//            for (int i = finish; i < finish + Gasket.getNumberOfCandlesToDetectMovement(); i++) {
-//                String s = in.get(i);
-//                double close = StringHelper.getDataHistory(Enums.CLOSE, s);
-//                double high = StringHelper.getDataHistory(Enums.HIGH, s);
-//                double low = StringHelper.getDataHistory(Enums.LOW, s);
-//
-//                if (finishCloseBuy < close || finishCloseBuy < high) {
-//                    outList.add(0, Enums.BUY.toString());
-//                    break;
-//                } else if (finishCloseSell > close || finishCloseSell > low) {
-//                    outList.add(0, Enums.SELL.toString());
-//                    break;
-//                }
-//            }
-//
-//            if (outList.size() == sizeListOut) {
-//                outList.add(0, Enums.FLAT.toString());
-//            }
-//            // конвертируем паттерны и наполняем входящий лист строками для обучения NN
-//            convertHistory(outList);
-//        }
-//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.HISTORY_CONVERSION_OVER));
-//        // формируем марицу для обучения
-//        if (forTestedNN) {
-//            testerNN.fillMatrixArray();
-//        } else {
-//            downloadedData.fillMatrixArray();
-//        }
-//    }
 }
