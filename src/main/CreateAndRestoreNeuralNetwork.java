@@ -13,7 +13,9 @@ import java.util.function.UnaryOperator;
 public class CreateAndRestoreNeuralNetwork {
     private ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private ArrayList<String> listInSavedWeights;
+    private String pathSavedWeightsPredictor;
     private UnaryOperator<Double> dsigmoid;
+    private NeuralNetwork neuralNetworkTwo;
     private UnaryOperator<Double> sigmoid;
     private NeuralNetwork neuralNetwork;
     private String pathSavedWeights;
@@ -23,6 +25,7 @@ public class CreateAndRestoreNeuralNetwork {
     private int[] numbersOfNeuronsInLayer;   // количество нейронов в слое
     private double[][] weights;             // веса
     private double[] neurons;               // нейроны
+    private boolean oneOrTwo;
     private double[] biases;                // смещение
     private Layer[] layers;
     private int nextSize;
@@ -35,7 +38,21 @@ public class CreateAndRestoreNeuralNetwork {
         this.pathSavedWeights = Gasket.getFilesAndPathCreator().getPathSavedWeights();
         Gasket.setCreateAndRestoreNeuralNetwork(this);
         this.learningRate = Gasket.getLearningRate();
+        this.oneOrTwo = false;
         createSigmoidDsigmoid();
+        restoreNN();
+    }
+
+    public CreateAndRestoreNeuralNetwork(boolean b) {
+        this.pathSavedWeightsPredictor = Gasket.getFilesAndPathCreator().getPathSavedWeightsPredictor();
+        this.readAndWriteNeuralNetworkSetting = Gasket.getReadAndWriteNeuralNetworkSetting();
+        this.pathSavedWeights = Gasket.getFilesAndPathCreator().getPathSavedWeights();
+        Gasket.setCreateAndRestoreNeuralNetwork(this);
+        this.learningRate = Gasket.getLearningRate();
+        this.oneOrTwo = false;
+        createSigmoidDsigmoid();
+        restoreNN();
+        this.oneOrTwo = true;
         restoreNN();
     }
 
@@ -43,7 +60,7 @@ public class CreateAndRestoreNeuralNetwork {
     public void restoreNN() {
         // {"numberOfNeuronsInLayer":[90,189,108,45,9,3],"numberOfSensoryNeurons":90,
         // "numberOfOutputNeurons":3,"samples":43900,"epochs":5}
-        this.listInSavedWeights = new ArrayList<>(readAndWriteNeuralNetworkSetting.readFileWeights());
+        this.listInSavedWeights = new ArrayList<>(readAndWriteNeuralNetworkSetting.readFileWeights(oneOrTwo));
 
         // находим первую строку параметров, инициализируем и заполнянем массив количества нейронов,
         // а так же создаем слои и заполняем ими массив слоев
@@ -122,9 +139,15 @@ public class CreateAndRestoreNeuralNetwork {
 
         }
 
-        neuralNetwork = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
-        Gasket.setNeuralNetwork(neuralNetwork);
+        if (oneOrTwo) {
+            neuralNetworkTwo = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
+            Gasket.setNeuralNetworkTow(neuralNetwork);
+        } else {
+            neuralNetwork = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
+            Gasket.setNeuralNetwork(neuralNetwork);
+        }
     }
+
 
 
 

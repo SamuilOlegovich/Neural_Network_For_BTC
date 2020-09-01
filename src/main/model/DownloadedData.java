@@ -46,7 +46,7 @@ public class DownloadedData {
         }
 
         if (predictNo) {
-            dataForNN = new double[downloadedDataList.size()][numberOfInputNeurons];
+            dataForNN = new double[downloadedDataList.size()][3];
             repliesForNN = new int[downloadedDataList.size()];
             for (int a = 0; a < downloadedDataList.size(); a++) {
                 String[] strings = downloadedDataList.get(a).split(";");

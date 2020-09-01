@@ -44,8 +44,7 @@ public class TeacherNeuralNetwork {
         this.inputs = Gasket.getDownloadedData().getDataForNN();
         this.epochs = Gasket.getNumberOfTrainingCycles();
         this.learningRate = Gasket.getLearningRate();
-        this.sigmoid = x -> 1 / (1 + Math.exp(-x));
-        this.dsigmoid = y -> y * (1 - y);
+        createSigmoidDsigmoid();
         this.predictNo = false;
         this.nn = createNeuralNetwork();
         Gasket.setTeacherNeuralNetwork(this);
@@ -54,15 +53,14 @@ public class TeacherNeuralNetwork {
     }
 
     public TeacherNeuralNetwork(boolean b) {
-        this.numberOfSensoryNeurons = Gasket.getDownloadedData().getNumberOfSensoryNeurons();
         this.samples = Gasket.getDownloadedData().getSizeDownloadedDataList();
-        this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.digits = Gasket.getDownloadedData().getRepliesForNN();
         this.inputs = Gasket.getDownloadedData().getDataForNN();
         this.epochs = Gasket.getNumberOfTrainingCycles();
         this.learningRate = Gasket.getLearningRate();
-        this.sigmoid = x -> 1 / (1 + Math.exp(-x));
-        this.dsigmoid = y -> y * (1 - y);
+        this.numberOfSensoryNeurons = 3;
+        this.numberOfOutputNeurons = 2;
+        createSigmoidDsigmoid();
         this.predictNo = b;
         this.nn = createNeuralNetwork();
         Gasket.setTeacherNeuralNetwork(this);
@@ -114,7 +112,6 @@ public class TeacherNeuralNetwork {
 
             for (int j = 0; j < batchSize; j++) {
                 int imgIndex = (int)(Math.random() * samples);
-//                double[] targets = new double[10];
                 double[] targets = new double[numberOfOutputNeurons];
                 int digit = digits[j];
                 targets[digit] = 1;
@@ -123,7 +120,6 @@ public class TeacherNeuralNetwork {
                 int maxDigit = 0;
                 double maxDigitWeight = -1;
 
-//                for (int k = 0; k < 10; k++) {
                 for (int k = 0; k < numberOfOutputNeurons; k++) {
                     if (outputs[k] > maxDigitWeight) {
                         maxDigitWeight = outputs[k];
@@ -133,7 +129,6 @@ public class TeacherNeuralNetwork {
 
                 if (digit == maxDigit) right++;
 
-//                for (int k = 0; k < 10; k++) {
                 for (int k = 0; k < numberOfOutputNeurons; k++) {
                     errorSum += (targets[k] - outputs[k]) * (targets[k] - outputs[k]);
                 }
@@ -145,6 +140,7 @@ public class TeacherNeuralNetwork {
                         + ". error: " + errorSum));
             }
         }
+
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.
                 THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING));
         keepTheNumberOfNeuronsInTheLayer();
@@ -212,6 +208,13 @@ public class TeacherNeuralNetwork {
         arrayList.add("\n" + Enums.NEXT.toString() + "\n");
         arrayList.addAll(nn.saveBalanceData());
         Gasket.getReadAndWriteNeuralNetworkSetting().saveAllNeuralNetworkData(arrayList, predictNo);
+    }
+
+
+
+    private void createSigmoidDsigmoid() {
+        sigmoid = x -> 1 / (1 + Math.exp(-x));
+        dsigmoid = y -> y * (1 - y);
     }
 
 

@@ -16,6 +16,7 @@ public class TesterNN {
     private int numberOfOutputNeurons;
     private int numberOfInputNeurons;               // количество входных нейронов
     private double[][] dataForNN;                   // готовые данные для НН
+    private NeuralNetwork nnTwo;
     private int[] repliesForNN;                     // ответы по данным для НН
     private NeuralNetwork nn;
     private boolean flag;
@@ -39,6 +40,7 @@ public class TesterNN {
         this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
         this.downloadedDataList = new ArrayList<>();
+        this.nnTwo = Gasket.getNeuralNetworkTow();
         this.dataForNextNN = new ArrayList<>();
         this.nn = Gasket.getNeuralNetwork();
         Gasket.setTesterNN(this);
@@ -74,6 +76,9 @@ public class TesterNN {
             double minDigitWeightForBuy = Gasket.getMinDigitWeightForBuy();
             double minDigitWeightForSell = Gasket.getMinDigitWeightForSell();
             double[] outputs = nn.feedForward(dataForNN[imgIndex]);
+            double[] outputsTwo = new double[2];
+            if (flag) outputsTwo = nnTwo.feedForward(outputs);
+
 
             for (int i = 0; i < outputs.length; i++) {
                 if (maxDigitWeight < outputs[i]) {

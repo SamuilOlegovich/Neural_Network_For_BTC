@@ -22,10 +22,15 @@ public class ReadAndWriteNeuralNetworkSetting {
 
 
     // считываем настройки NN
-    protected ArrayList<String> readFileWeights() {
+    protected ArrayList<String> readFileWeights(boolean b) {
         ArrayList<String> listHistory = null;
         try {
-            listHistory =  new ArrayList<>(WriterAndReadFile.readFile(pathWeights));
+            if (b) {
+                listHistory = new ArrayList<>(WriterAndReadFile.readFile(Gasket.getFilesAndPathCreator()
+                        .getPathSavedWeightsPredictor()));
+            } else {
+                listHistory = new ArrayList<>(WriterAndReadFile.readFile(pathWeights));
+            }
             if (listHistory.size() < 1) {
                 ConsoleHelper.writeMessage(StringHelper.getString(Enums.WEIGHTS_FILE_NOT_DETECTED));
             }
@@ -98,12 +103,11 @@ public class ReadAndWriteNeuralNetworkSetting {
             for (String s : listHistory) {
                 downloadedData.addDownloadedList(s);
             }
-
             downloadedData.fillMatrixArray();
             new TeacherNeuralNetwork(true);
             listHistory.clear();
         } catch (Exception e) {
-            ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE));
+            ConsoleHelper.writeMessage(StringHelper.getString(Enums.ERROR_WHEN_READING_THE_HISTORY_FILE + "RAW"));
         }
     }
 }
