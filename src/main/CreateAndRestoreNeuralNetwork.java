@@ -1,6 +1,5 @@
 package main;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class CreateAndRestoreNeuralNetwork {
     private int[] numbersOfNeuronsInLayer;   // количество нейронов в слое
     private double[][] weights;             // веса
     private double[] neurons;               // нейроны
-    private boolean oneOrTwo;
+    private volatile boolean oneOrTwo;
     private double[] biases;                // смещение
     private Layer[] layers;
     private int nextSize;
@@ -141,7 +140,7 @@ public class CreateAndRestoreNeuralNetwork {
 
         if (oneOrTwo) {
             neuralNetworkTwo = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
-            Gasket.setNeuralNetworkTow(neuralNetwork);
+            Gasket.setNeuralNetworkTwo(neuralNetworkTwo);
         } else {
             neuralNetwork = new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer, layers);
             Gasket.setNeuralNetwork(neuralNetwork);

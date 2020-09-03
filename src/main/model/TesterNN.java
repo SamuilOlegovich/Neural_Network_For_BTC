@@ -40,7 +40,7 @@ public class TesterNN {
         this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
         this.downloadedDataList = new ArrayList<>();
-        this.nnTwo = Gasket.getNeuralNetworkTow();
+        this.nnTwo = Gasket.getNeuralNetworkTwo();
         this.dataForNextNN = new ArrayList<>();
         this.nn = Gasket.getNeuralNetwork();
         Gasket.setTesterNN(this);
@@ -77,7 +77,8 @@ public class TesterNN {
             double minDigitWeightForSell = Gasket.getMinDigitWeightForSell();
             double[] outputs = nn.feedForward(dataForNN[imgIndex]);
             double[] outputsTwo = new double[2];
-            if (flag) outputsTwo = nnTwo.feedForward(outputs);
+            if (flag) { outputsTwo = nnTwo.feedForward(outputs); }
+
 
 
             for (int i = 0; i < outputs.length; i++) {
@@ -91,19 +92,19 @@ public class TesterNN {
 
 
             if (flag) {
-                if (digit == maxDigit && digit == 1 && maxDigitWeight > minDigitWeightForBuy) {
+                if (digit == maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight < 0.9) {
                     buyGood++;
-                } else if (digit != maxDigit && digit == 1) {
+                } else if (digit != maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight < 0.9) {
                     if (maxDigit == 0) dB++;
                     buyBad++;
-                } else if (digit == maxDigit && digit == 2 && maxDigitWeight > minDigitWeightForBuy) {
+                } else if (digit == maxDigit && digit == 2 && outputsTwo[1] > 0.9 && maxDigitWeight > 0.9) {
                     sellGood++;
-                } else if (digit != maxDigit && digit == 2) {
+                } else if (digit != maxDigit && digit == 2 && outputsTwo[1] > 0.9) {
                     if (maxDigit == 0) dS++;
                     sellBad++;
-                } else if (digit == maxDigit && digit == 0) {
+                } else if (digit == maxDigit && digit == 0 && outputsTwo[1] > 0.9) {
                     flatGood++;
-                } else if (digit != maxDigit && digit == 0) {
+                } else if (digit != maxDigit && digit == 0 && outputsTwo[1] > 0.9) {
                     flatBad++;
                 }
             }

@@ -13,7 +13,7 @@ public class Gasket {
     private static TeacherNeuralNetwork teacherNeuralNetwork;
     private static FilesAndPathCreator filesAndPathCreator;
     private static ExecutorCommandos executorCommandos;
-    private static NeuralNetwork neuralNetworkTow;
+    private static NeuralNetwork neuralNetworkTwo;
     private static DownloadedData downloadedData;
     private static NeuralNetwork neuralNetwork;
     private static RunTheProgram runTheProgram;
@@ -58,12 +58,12 @@ public class Gasket {
     }
 
 
-    public static NeuralNetwork getNeuralNetworkTow() {
-        return neuralNetworkTow;
+    public static NeuralNetwork getNeuralNetworkTwo() {
+        return neuralNetworkTwo;
     }
 
-    public static void setNeuralNetworkTow(NeuralNetwork neuralNetworkTow) {
-        Gasket.neuralNetworkTow = neuralNetworkTow;
+    public static void setNeuralNetworkTwo(NeuralNetwork neuralNetworkTwo) {
+        Gasket.neuralNetworkTwo = neuralNetworkTwo;
     }
 
     public static boolean isPredictNextCandle() {
