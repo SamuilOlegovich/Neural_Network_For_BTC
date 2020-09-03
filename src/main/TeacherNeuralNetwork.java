@@ -71,20 +71,23 @@ public class TeacherNeuralNetwork {
 
     private NeuralNetwork createNeuralNetwork() {
         if (predictNo) {
-            numbersOfNeuronsInLayer = new int[5];
+            numbersOfNeuronsInLayer = new int[6];
             numbersOfNeuronsInLayer[0] = 3;
             numbersOfNeuronsInLayer[1] = 6;
             numbersOfNeuronsInLayer[2] = 6;
             numbersOfNeuronsInLayer[3] = 4;
-            numbersOfNeuronsInLayer[4] = 2;
+            numbersOfNeuronsInLayer[4] = 3;
+            numbersOfNeuronsInLayer[5] = 2;
         } else {
-            numbersOfNeuronsInLayer = new int[6];
+            numbersOfNeuronsInLayer = new int[8];
             numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
             numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
-            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
-            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
-            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
-            numbersOfNeuronsInLayer[5] = 3;
+            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.6);    // 4258
+            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
+            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
+            numbersOfNeuronsInLayer[5] = (int) Math.round(numberOfSensoryNeurons * 0.2);    // 912
+            numbersOfNeuronsInLayer[6] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
+            numbersOfNeuronsInLayer[7] = 3;
         }
         return new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer);
     }

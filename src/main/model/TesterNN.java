@@ -92,9 +92,9 @@ public class TesterNN {
 
 
             if (flag) {
-                if (digit == maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight < 0.9) {
+                if (digit == maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight > 0.97) {
                     buyGood++;
-                } else if (digit != maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight < 0.9) {
+                } else if (digit != maxDigit && digit == 1 && outputsTwo[1] > 0.9 && maxDigitWeight > 0.97) {
                     if (maxDigit == 0) dB++;
                     buyBad++;
                 } else if (digit == maxDigit && digit == 2 && outputsTwo[1] > 0.9 && maxDigitWeight > 0.9) {
