@@ -107,6 +107,7 @@ public class TeacherNeuralNetwork {
 
     private void digits() {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED));
+        int interest = (epochs / 100);
 
         for (int i = 1; i < epochs; i++) {
             int right = 0;
@@ -136,6 +137,27 @@ public class TeacherNeuralNetwork {
                     errorSum += (targets[k] - outputs[k]) * (targets[k] - outputs[k]);
                 }
                 nn.backpropagation(targets);
+            }
+
+            // выводим процент обучения NN
+            if (interest * 10 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("10%"));
+            } else if (interest * 20 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("20%"));
+            } else if (interest * 30 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("30%"));
+            } else if (interest * 40 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("40%"));
+            } else if (interest * 50 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("50%"));
+            } else if (interest * 60 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("60%"));
+            } else if (interest * 70 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("70%"));
+            } else if (interest * 80 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("80%"));
+            } else if (interest * 90 == i) {
+                ConsoleHelper.writeMessage(StringHelper.getString("90%"));
             }
 
             if (Gasket.isWhetherOrNotShowLearningProcess()) {
