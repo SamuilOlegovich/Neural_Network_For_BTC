@@ -71,37 +71,30 @@ public class TeacherNeuralNetwork {
 
     private NeuralNetwork createNeuralNetwork() {
         if (predictNo) {
-            numbersOfNeuronsInLayer = new int[6];
+            numbersOfNeuronsInLayer = new int[4];
             numbersOfNeuronsInLayer[0] = 3;
             numbersOfNeuronsInLayer[1] = 6;
-            numbersOfNeuronsInLayer[2] = 6;
-            numbersOfNeuronsInLayer[3] = 4;
-            numbersOfNeuronsInLayer[4] = 3;
-            numbersOfNeuronsInLayer[5] = 2;
+            numbersOfNeuronsInLayer[2] = 4;
+//            numbersOfNeuronsInLayer[3] = 4;
+//            numbersOfNeuronsInLayer[4] = 3;
+            numbersOfNeuronsInLayer[3] = 2;
         } else {
-            numbersOfNeuronsInLayer = new int[8];
+            numbersOfNeuronsInLayer = new int[6];
             numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
-            numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.1);    // 4258
-            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.6);    // 4258
-            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 1.2);    // 2281
-            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.5);    // 912
-            numbersOfNeuronsInLayer[5] = (int) Math.round(numberOfSensoryNeurons * 0.2);    // 912
-            numbersOfNeuronsInLayer[6] = (int) Math.round(numberOfSensoryNeurons * 0.1);    // 152
-            numbersOfNeuronsInLayer[7] = 3;
+//            numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.2);
+//            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.8);
+//            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 1.4);
+//            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 1.2);
+//            numbersOfNeuronsInLayer[5] = (int) Math.round(numberOfSensoryNeurons * 1.0);
+            numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 0.8);
+            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 0.6);
+            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.4);
+            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 0.2);
+            numbersOfNeuronsInLayer[5] = 3;
         }
         return new NeuralNetwork(learningRate, sigmoid, dsigmoid, numbersOfNeuronsInLayer);
     }
 
-
-
-
-//    public boolean startLearning() {
-//        digits();
-//        ConsoleHelper.writeMessage("Хух! НАУЧИЛСЯ!");
-//        FormDigits f = new FormDigits(nn);
-//        new Thread(f).start();
-//        return true;
-//    }
 
 
 
@@ -170,55 +163,6 @@ public class TeacherNeuralNetwork {
                 THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING));
         keepTheNumberOfNeuronsInTheLayer();
     }
-
-
-
-//    private void digits() {
-//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.NN_LEARNING_PROCESS_STARTED));
-//
-//        for (int i = 1; i < epochs; i++) {
-//            int right = 0;
-//            double errorSum = 0;
-//            int batchSize = 100;
-//
-//            for (int j = 0; j < batchSize; j++) {
-//                int imgIndex = (int)(Math.random() * samples);
-////                double[] targets = new double[10];
-//                double[] targets = new double[numberOfOutputNeurons];
-//                int digit = digits[imgIndex];
-//                targets[digit] = 1;
-//
-//                double[] outputs = nn.feedForward(inputs[imgIndex]);
-//                int maxDigit = 0;
-//                double maxDigitWeight = -1;
-//
-////                for (int k = 0; k < 10; k++) {
-//                for (int k = 0; k < numberOfOutputNeurons; k++) {
-//                    if (outputs[k] > maxDigitWeight) {
-//                        maxDigitWeight = outputs[k];
-//                        maxDigit = k;
-//                    }
-//                }
-//
-//                if (digit == maxDigit) right++;
-//
-////                for (int k = 0; k < 10; k++) {
-//                for (int k = 0; k < numberOfOutputNeurons; k++) {
-//                    errorSum += (targets[k] - outputs[k]) * (targets[k] - outputs[k]);
-//                }
-//                nn.backpropagation(targets);
-//            }
-//
-//            if (Gasket.isWhetherOrNotShowLearningProcess()) {
-//                ConsoleHelper.writeMessage(StringHelper.getString("epoch: " + i + ". correct: " + right
-//                        + ". error: " + errorSum));
-//            }
-//        }
-//        ConsoleHelper.writeMessage(StringHelper.getString(Enums.
-//                THE_NN_LEARNING_PROCESS_IS_COMPLETED_I_AM_SAVING));
-//        keepTheNumberOfNeuronsInTheLayer();
-//    }
-
 
 
     // сохранить количество нейронов в слое
