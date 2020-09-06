@@ -101,7 +101,7 @@ public class TesterNN {
                         && maxDigitWeight > 0.985) {
                     if (maxDigit == 0) dB++;
                     buyBad++;
-                    ConsoleHelper.writeMessage(StringHelper.getString(a + ""));
+//                    ConsoleHelper.writeMessage(StringHelper.getString(a + ""));
 
                 } else if (digit == maxDigit && digit == 2
                         && outputsTwo[1] > 0.98
