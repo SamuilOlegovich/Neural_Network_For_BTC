@@ -1,7 +1,7 @@
 package main.view;
 
 import main.Gasket;
-import main.WriterAndReadFile;
+import main.model.WriterAndReadFile;
 
 import java.io.InputStreamReader;
 import java.io.BufferedReader;

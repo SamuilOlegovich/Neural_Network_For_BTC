@@ -1,10 +1,9 @@
 package main;
 
 import main.controller.Commandos;
+import main.controller.ExecutorCommandos;
 import main.controller.RunTheProgram;
-import main.model.DownloadedData;
-import main.model.FilesAndPathCreator;
-import main.model.TesterNN;
+import main.model.*;
 import main.view.View;
 
 public class Gasket {

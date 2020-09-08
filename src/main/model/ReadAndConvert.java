@@ -1,7 +1,6 @@
-package main;
+package main.model;
 
-import main.model.DownloadedData;
-import main.model.TesterNN;
+import main.Enums;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
@@ -57,7 +56,8 @@ public class ReadAndConvert {
     private void convertHistory(ArrayList<String> in) {
         ArrayList<String> arrayList = new ArrayList<>(in);
         StringBuilder stringBuilder = new StringBuilder(arrayList.get(0));
-        transformerHistory.startData(arrayList.get(1));
+//        transformerHistory.startData(arrayList.get(1));
+        transformerHistory.startData(arrayList.get(1), arrayList.get(arrayList.size() - 1));
         arrayList.remove(1);
         arrayList.remove(0);
 

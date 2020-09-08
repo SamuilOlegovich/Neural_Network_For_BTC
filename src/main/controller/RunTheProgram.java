@@ -1,7 +1,9 @@
 package main.controller;
 
-import main.*;
+import main.model.CreateAndRestoreNeuralNetwork;
 import main.model.DownloadedData;
+import main.model.ReadAndConvert;
+import main.model.TeacherNeuralNetwork;
 
 public class RunTheProgram extends Thread {
 

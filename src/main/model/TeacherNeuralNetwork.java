@@ -1,8 +1,9 @@
-package main;
+package main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import main.Enums;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;

@@ -2,7 +2,6 @@ package main.model;
 
 import main.Enums;
 import main.Gasket;
-import main.StringHelper;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;

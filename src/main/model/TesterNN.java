@@ -93,23 +93,23 @@ public class TesterNN {
 
             if (flag) {
                 if (digit == maxDigit && digit == 1
-                        && outputsTwo[1] > 0.98
-                        && maxDigitWeight > 0.987) {
+//                        && outputsTwo[1] > 0.98
+                        && maxDigitWeight > 0.9) {
                     buyGood++;
                 } else if (digit != maxDigit && digit == 1
-                        && outputsTwo[1] > 0.98
-                        && maxDigitWeight > 0.985) {
+//                        && outputsTwo[1] > 0.98
+                        && maxDigitWeight > 0.9) {
                     if (maxDigit == 0) dB++;
                     buyBad++;
 //                    ConsoleHelper.writeMessage(StringHelper.getString(a + ""));
 
                 } else if (digit == maxDigit && digit == 2
-                        && outputsTwo[1] > 0.98
-                        && maxDigitWeight > 0.98) {
+//                        && outputsTwo[1] > 0.98
+                        && maxDigitWeight > 0.9) {
                     sellGood++;
                 } else if (digit != maxDigit && digit == 2
-                        && outputsTwo[1] > 0.98
-                        && maxDigitWeight > 0.98) {
+//                        && outputsTwo[1] > 0.98
+                        && maxDigitWeight > 0.9) {
                     if (maxDigit == 0) dS++;
                     sellBad++;
                 } else if (digit == maxDigit && digit == 0 && outputsTwo[1] > 0.98) {

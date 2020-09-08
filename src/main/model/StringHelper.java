@@ -1,6 +1,7 @@
-package main;
+package main.model;
 
 
+import main.Enums;
 import main.model.DatesTimes;
 
 public class StringHelper {

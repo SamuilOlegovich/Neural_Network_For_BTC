@@ -1,5 +1,6 @@
-package main;
+package main.model;
 
+import main.*;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;

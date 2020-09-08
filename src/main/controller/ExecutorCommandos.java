@@ -1,6 +1,10 @@
-package main;
+package main.controller;
 
 
+import main.Enums;
+import main.Gasket;
+import main.model.ReadAndWriteSetting;
+import main.model.StringHelper;
 import main.model.DatesTimes;
 import main.view.ConsoleHelper;
 

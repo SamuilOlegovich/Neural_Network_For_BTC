@@ -1,9 +1,6 @@
 package main.controller;
 
-import main.*;
-import main.model.DownloadedData;
-import main.model.TesterNN;
-import main.view.ConsoleHelper;
+import main.model.*;
 
 
 public class Commandos {
