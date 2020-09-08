@@ -1,7 +1,10 @@
-package main;
+package main.controller;
 
 
+import main.Enums;
 import main.model.DatesTimes;
+import main.model.ReadAndWriteSetting;
+import main.model.StringHelper;
 import main.view.ConsoleHelper;
 
 public class ExecutorCommandos {

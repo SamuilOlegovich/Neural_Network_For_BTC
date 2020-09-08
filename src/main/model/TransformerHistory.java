@@ -1,4 +1,6 @@
-package main;
+package main.model;
+
+import main.Enums;
 
 public class TransformerHistory {
     private double volume;

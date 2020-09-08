@@ -1,7 +1,6 @@
 package main.view;
 
-import main.StringHelper;
-import main.model.DatesTimes;
+import main.model.StringHelper;
 import main.Gasket;
 import main.controller.RunTheProgram;
 

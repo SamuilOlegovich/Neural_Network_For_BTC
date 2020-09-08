@@ -1,4 +1,4 @@
-package main;
+package main.model;
 
 import javax.swing.*;
 import java.awt.*;

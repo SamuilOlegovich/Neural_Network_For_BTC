@@ -1,10 +1,9 @@
 package main.controller;
 
 
-import main.ExecutorCommandos;
 import main.Gasket;
-import main.ReadAndWriteNeuralNetworkSetting;
-import main.ReadAndWriteSetting;
+import main.model.ReadAndWriteNeuralNetworkSetting;
+import main.model.ReadAndWriteSetting;
 import main.model.FilesAndPathCreator;
 import main.view.View;
 

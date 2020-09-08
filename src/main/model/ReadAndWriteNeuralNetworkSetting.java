@@ -1,6 +1,7 @@
-package main;
+package main.model;
 
-import main.model.DownloadedData;
+import main.Enums;
+import main.Gasket;
 import main.view.ConsoleHelper;
 
 import java.util.ArrayList;
