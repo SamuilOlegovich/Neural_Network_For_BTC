@@ -62,7 +62,6 @@ public class DatesTimes {
                 ConsoleHelper.writeMessage("неверный формат даты --- " + stringIn);
             }
             return dateFromString;
-
         } else {
 
             try {
@@ -70,7 +69,6 @@ public class DatesTimes {
             } catch (Exception e) {
                 ConsoleHelper.writeMessage("неверный формат даты --- " + string);
             }
-
             return dateFromString;
         }
     }

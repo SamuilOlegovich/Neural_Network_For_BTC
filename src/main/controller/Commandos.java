@@ -14,7 +14,6 @@ public class Commandos {
                     new DownloadedData();
                     new ReadAndConvert();
                     new TeacherNeuralNetwork();
-//            teacherNeuralNetwork.startLearning();
                     new TesterNN(); // псевдо тест, используем для получения материалов и обучения предсказателя
                 }
                     Gasket.getViewThread().setPreviousColor();
@@ -27,9 +26,7 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-//                CreateAndRestoreNeuralNetwork createAndRestoreNeuralNetwork =
-//                        new CreateAndRestoreNeuralNetwork();
-                        new CreateAndRestoreNeuralNetwork(true); // востанавливаем и обычную сеть и сеть предсказателя
+                new CreateAndRestoreNeuralNetwork(true); // востанавливаем и обычную сеть и сеть предсказателя
                 Gasket.getViewThread().setPreviousColor();
             }
         }.start();
@@ -40,8 +37,7 @@ public class Commandos {
         new Thread() {
             @Override
             public void run() {
-//                TesterNN testerNN =
-                        new TesterNN(true); // тестируем уже с предсказателем
+                new TesterNN(true); // тестируем уже с предсказателем
                 Gasket.getViewThread().setPreviousColor();
             }
         }.start();

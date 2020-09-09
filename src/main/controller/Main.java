@@ -29,8 +29,6 @@ public class Main {
             }
         }
 
-
-
         // Запускаем все что связано с путями, файлами, чнением и настройками.
         FilesAndPathCreator filesAndPathCreator = new FilesAndPathCreator();
         ExecutorCommandos executorCommandos = new ExecutorCommandos();
@@ -38,8 +36,6 @@ public class Main {
         ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting = new ReadAndWriteNeuralNetworkSetting();
 
         // запускаем визуальную часть
-//        Main.FormDigits f = new Main.FormDigits(Main.Main.Gasket.getNeuralNetwork());
-//        new Thread(f).start();
     }
 
 }
