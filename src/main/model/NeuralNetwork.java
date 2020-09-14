@@ -11,7 +11,6 @@ import java.util.function.UnaryOperator;
 
 
 
-
 public class NeuralNetwork {
     @JsonIgnore
     private UnaryOperator<Double> derivative;
@@ -146,10 +145,7 @@ public class NeuralNetwork {
     // созхранняем все данные весов, нейронов смещения и т д
     protected ArrayList<String> saveBalanceData() {
         ArrayList<String> arrayList = new ArrayList<>();
-//        ObjectMapper objectMapp = new ObjectMapper();
         try {
-//            arrayList.add(objectMapp.writeValueAsString(this));
-//            arrayList.add("\n" + Enums.NEXT.toString() + "\n");
             for (Layer l : layers) {
                 l.setID();
                 ObjectMapper objectMapper = new ObjectMapper();

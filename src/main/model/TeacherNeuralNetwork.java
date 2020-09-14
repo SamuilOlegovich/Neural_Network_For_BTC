@@ -77,17 +77,10 @@ public class TeacherNeuralNetwork {
             numbersOfNeuronsInLayer[0] = 3;
             numbersOfNeuronsInLayer[1] = 6;
             numbersOfNeuronsInLayer[2] = 4;
-//            numbersOfNeuronsInLayer[3] = 4;
-//            numbersOfNeuronsInLayer[4] = 3;
             numbersOfNeuronsInLayer[3] = 2;
         } else {
             numbersOfNeuronsInLayer = new int[6];
             numbersOfNeuronsInLayer[0] = numberOfSensoryNeurons;
-//            numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 2.2);
-//            numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 1.8);
-//            numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 1.4);
-//            numbersOfNeuronsInLayer[4] = (int) Math.round(numberOfSensoryNeurons * 1.2);
-//            numbersOfNeuronsInLayer[5] = (int) Math.round(numberOfSensoryNeurons * 1.0);
             numbersOfNeuronsInLayer[1] = (int) Math.round(numberOfSensoryNeurons * 0.8);
             numbersOfNeuronsInLayer[2] = (int) Math.round(numberOfSensoryNeurons * 0.6);
             numbersOfNeuronsInLayer[3] = (int) Math.round(numberOfSensoryNeurons * 0.4);

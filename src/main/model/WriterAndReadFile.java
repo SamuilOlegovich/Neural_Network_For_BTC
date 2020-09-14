@@ -21,7 +21,6 @@ public class WriterAndReadFile {
     }
 
 
-
     public static ArrayList<String> readFile(String path) throws Exception {
         File file = new File(path);
         ArrayList<String> arrayList = new ArrayList<>();

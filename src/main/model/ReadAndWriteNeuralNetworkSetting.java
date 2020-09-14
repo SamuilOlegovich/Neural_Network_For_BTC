@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 
 public class ReadAndWriteNeuralNetworkSetting {
-//    private static ReadAndWriteNeuralNetworkSetting readAndWriteNeuralNetworkSetting;
     private String pathSavedWeights;
     private String pathWeights;
 

@@ -23,7 +23,6 @@ public class TesterNN {
 
 
     public TesterNN() {
-//        this.dataForNextNN = new double[Gasket.getNumberOfOutputNeurons() + 1];
         this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
         this.downloadedDataList = new ArrayList<>();
@@ -36,7 +35,6 @@ public class TesterNN {
     }
 
     public TesterNN(boolean b) {
-//        this.dataForNextNN = new double[Gasket.getNumberOfOutputNeurons() + 1];
         this.numberOfOutputNeurons = Gasket.getNumberOfOutputNeurons();
         this.numberOfInputNeurons = Gasket.getNumberOfInputNeurons();
         this.downloadedDataList = new ArrayList<>();
