@@ -36,52 +36,77 @@ public class TransformerHistory {
         lowIn = StringHelper.getDataHistory(Enums.LOW, in);
 
 
-        // тело свечи
-        double candleBody = changeTotal(openIn, closeIn) * getDirection(openIn, closeIn);
-//        double candleBody = changeTotal(open, openIn) * getDirection(open, openIn);
-        // от хай до лов (вся свеча)
-        double fromHighToLow = changeTotal(highIn, lowIn) * getDirection(openIn, closeIn);
-        // опен хай
-        double openHigh = changeTotal(highIn, openIn) * getDirection(openIn, closeIn);
-        // опен лов
-        double openLow = changeTotal(openIn, lowIn) * getDirection(openIn, closeIn);
+        double candleOpen = calculateDeviationFromCenter(openIn, closeIn);
+        double candleClose = calculateDeviationFromCenter(closeIn, openIn);
+        double candleHigh = calculateDeviationFromCenter(highIn, lowIn);
+        double candleLow = calculateDeviationFromCenter(lowIn, highIn);
 
-        // тело свечи разница
-        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
-                * changeOfDirection(open, close, openIn, closeIn);
-        // разница от хай до лов
-        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
-                * changeOfDirection(high, low, highIn, lowIn);
-        // разница опен хай
-        double openHighPerDif = changeTotal(high, open, highIn, openIn)
-                * changeOfDirection(high, open, highIn, openIn);
-        // разница опен лов
-        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
-                * changeOfDirection(open, low, openIn, lowIn);
-        // разница объема всей свечи
-        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
-                * getDirection(volume, volumeIn);
-
-        this.volume = volumeIn;
-        this.close = closeIn;
-        this.open = openIn;
-        this.high = highIn;
-        this.low = lowIn;
 
         return new StringBuilder()
-                .append(candleBody).append(";")
-                .append(fromHighToLow).append(";")
-                .append(openHigh).append(";")
-                .append(openLow)
-//                .append(";")
-//                .append(candleBodyPerDif).append(";")
-//                .append(wholeCandlePerDif).append(";")
-//                .append(openHighPerDif).append(";")
-//                .append(openLowPerDif)
-//                .append(";")
-//                .append(volumePerDif)
+                .append(candleOpen).append(";")
+                .append(candleClose).append(";")
+                .append(candleHigh).append(";")
+                .append(candleLow)
                 .toString();
     }
+
+
+
+
+//    public String transformHistory(String in) {
+//        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
+//        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
+//        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
+//        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
+//        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
+//
+//
+//        // тело свечи
+//        double candleBody = changeTotal(openIn, closeIn) * getDirection(openIn, closeIn);
+////        double candleBody = changeTotal(open, openIn) * getDirection(open, openIn);
+//        // от хай до лов (вся свеча)
+//        double fromHighToLow = changeTotal(highIn, lowIn) * getDirection(openIn, closeIn);
+//        // опен хай
+//        double openHigh = changeTotal(highIn, openIn) * getDirection(openIn, closeIn);
+//        // опен лов
+//        double openLow = changeTotal(openIn, lowIn) * getDirection(openIn, closeIn);
+//
+//        // тело свечи разница
+//        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
+//                * changeOfDirection(open, close, openIn, closeIn);
+//        // разница от хай до лов
+//        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
+//                * changeOfDirection(high, low, highIn, lowIn);
+//        // разница опен хай
+//        double openHighPerDif = changeTotal(high, open, highIn, openIn)
+//                * changeOfDirection(high, open, highIn, openIn);
+//        // разница опен лов
+//        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
+//                * changeOfDirection(open, low, openIn, lowIn);
+//        // разница объема всей свечи
+//        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
+//                * getDirection(volume, volumeIn);
+//
+//        this.volume = volumeIn;
+//        this.close = closeIn;
+//        this.open = openIn;
+//        this.high = highIn;
+//        this.low = lowIn;
+//
+//        return new StringBuilder()
+//                .append(candleBody).append(";")
+//                .append(fromHighToLow).append(";")
+//                .append(openHigh).append(";")
+//                .append(openLow)
+////                .append(";")
+////                .append(candleBodyPerDif).append(";")
+////                .append(wholeCandlePerDif).append(";")
+////                .append(openHighPerDif).append(";")
+////                .append(openLowPerDif)
+////                .append(";")
+////                .append(volumePerDif)
+//                .toString();
+//    }
 
 
 
@@ -138,6 +163,23 @@ public class TransformerHistory {
 //    }
 
 
+
+    private double calculateCenter(double a, double b) {
+        return (a + b) / 2.0;
+    }
+
+    private double calculateDeviationFromCenter(double a, double b) {
+        double center = calculateCenter(a, b);
+        double onePercent = center / 100.0;
+
+        if (a > center) {
+            return (a - center) / onePercent;
+        } else if (a < center) {
+//            return ((center - a) / 100.0) * -1;
+            return (center - a) / 100.0;
+        }
+        return 0.0;
+    }
 
     private double getDirection(double a, double b) {
         if (a > b) return -1.0;
