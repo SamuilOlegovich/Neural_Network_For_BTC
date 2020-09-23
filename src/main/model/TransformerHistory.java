@@ -15,6 +15,9 @@ public class TransformerHistory {
     private double highIn;
     private double lowIn;
 
+    private int numberCandle;
+    private int directionCandle;
+
 
 
 
@@ -24,6 +27,8 @@ public class TransformerHistory {
         open = StringHelper.getDataHistory(Enums.OPEN, in);
         high = StringHelper.getDataHistory(Enums.HIGH, in);
         low = StringHelper.getDataHistory(Enums.LOW, in);
+        directionCandle = 0;
+        numberCandle = 0;
     }
 
 
@@ -35,20 +40,63 @@ public class TransformerHistory {
         highIn = StringHelper.getDataHistory(Enums.HIGH, in);
         lowIn = StringHelper.getDataHistory(Enums.LOW, in);
 
+        int direction = 0;
+        if (openIn > closeIn) direction = -1;
+        else if (openIn < closeIn) direction = 1;
+        else  direction = 0;
 
-        double candleOpen = calculateDeviationFromCenter(openIn, closeIn);
-        double candleClose = calculateDeviationFromCenter(closeIn, openIn);
-        double candleHigh = calculateDeviationFromCenter(highIn, lowIn);
-        double candleLow = calculateDeviationFromCenter(lowIn, highIn);
+        if (directionCandle == direction) numberCandle++;
+        else numberCandle = 1;
 
+        directionCandle = direction;
+        int result = 0;
 
-        return new StringBuilder()
-                .append(candleOpen).append(";")
-                .append(candleClose).append(";")
-                .append(candleHigh).append(";")
-                .append(candleLow)
-                .toString();
+        if (direction != 0) result = numberCandle * direction;
+        else result = numberCandle;
+
+        return new StringBuilder().append(result / 100.0).toString();
     }
+
+
+
+//    public String transformHistory(String in) {
+//        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
+//        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
+//        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
+//        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
+//        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
+//
+//        double direction = 0.0;
+//        if (openIn > closeIn) direction = 0.0;
+//        else if (openIn < closeIn) direction = 1.0;
+//        else  direction = 0.5;
+//
+//        return new StringBuilder().append(direction).toString();
+//    }
+
+
+
+//    public String transformHistory(String in) {
+//        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
+//        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
+//        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
+//        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
+//        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
+//
+//
+//        double candleOpen = calculateDeviationFromCenter(openIn, closeIn);
+//        double candleClose = calculateDeviationFromCenter(closeIn, openIn);
+//        double candleHigh = calculateDeviationFromCenter(highIn, lowIn);
+//        double candleLow = calculateDeviationFromCenter(lowIn, highIn);
+//
+//
+//        return new StringBuilder()
+//                .append(candleOpen).append(";")
+//                .append(candleClose).append(";")
+//                .append(candleHigh).append(";")
+//                .append(candleLow)
+//                .toString();
+//    }
 
 
 
@@ -175,8 +223,8 @@ public class TransformerHistory {
         if (a > center) {
             return (a - center) / onePercent;
         } else if (a < center) {
-//            return ((center - a) / 100.0) * -1;
-            return (center - a) / 100.0;
+            return ((center - a) / 100.0) * -1;
+//            return (center - a) / 100.0;
         }
         return 0.0;
     }
