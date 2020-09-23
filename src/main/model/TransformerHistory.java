@@ -33,29 +33,29 @@ public class TransformerHistory {
 
 
 
-    public String transformHistory(String in) {
-        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
-        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
-        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
-        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
-        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
-
-        int direction = 0;
-        if (openIn > closeIn) direction = -1;
-        else if (openIn < closeIn) direction = 1;
-        else  direction = 0;
-
-        if (directionCandle == direction) numberCandle++;
-        else numberCandle = 1;
-
-        directionCandle = direction;
-        int result = 0;
-
-        if (direction != 0) result = numberCandle * direction;
-        else result = numberCandle;
-
-        return new StringBuilder().append(result / 100.0).toString();
-    }
+//    public String transformHistory(String in) {
+//        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
+//        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
+//        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
+//        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
+//        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
+//
+//        int direction = 0;
+//        if (openIn > closeIn) direction = -1;
+//        else if (openIn < closeIn) direction = 1;
+//        else  direction = 0;
+//
+//        if (directionCandle == direction) numberCandle++;
+//        else numberCandle = 1;
+//
+//        directionCandle = direction;
+//        int result = 0;
+//
+//        if (direction != 0) result = numberCandle * direction;
+//        else result = numberCandle;
+//
+//        return new StringBuilder().append(result / 100.0).toString();
+//    }
 
 
 
@@ -159,56 +159,56 @@ public class TransformerHistory {
 
 
 
-//    public String transformHistory(String in) {
-//        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
-//        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
-//        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
-//        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
-//        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
-//
-//
-//        // тело свечи
-//        double candleBody = changeTotal(openIn, closeIn) * getDirection(openIn, close);
-//        // от хай до лов (вся свеча)
-//        double fromHighToLow = changeTotal(highIn, lowIn);
-//        // опен хай
-//        double openHigh = changeTotal(highIn, openIn);
-//        // опен лов
-//        double openLow = changeTotal(openIn, lowIn);
-//
-//        // тело свечи разница
-//        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
-//                * changeOfDirection(open, close, openIn, closeIn);
-//        // разница от хай до лов
-//        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
-//                * changeOfDirection(high, low, highIn, lowIn);
-//        // разница опен хай
-//        double openHighPerDif = changeTotal(high, open, highIn, openIn)
-//                * changeOfDirection(high, open, highIn, openIn);
-//        // разница опен лов
-//        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
-//                * changeOfDirection(open, low, openIn, lowIn);
-//        // разница объема всей свечи
-//        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
-//                * getDirection(volume, volumeIn);
-//
-//        this.volume = volumeIn;
-//        this.close = closeIn;
-//        this.open = openIn;
-//        this.high = highIn;
-//        this.low = lowIn;
-//
-//        return new StringBuilder()
-//                .append(candleBody).append(";")
-//                .append(fromHighToLow).append(";")
-//                .append(openHigh).append(";")
-//                .append(openLow).append(";")
-//                .append(candleBodyPerDif).append(";")
-//                .append(wholeCandlePerDif).append(";")
-//                .append(openHighPerDif).append(";")
-//                .append(openLowPerDif).append(";")
-//                .append(volumePerDif).toString();
-//    }
+    public String transformHistory(String in) {
+        volumeIn = StringHelper.getDataHistory(Enums.VOLUME, in);
+        closeIn = StringHelper.getDataHistory(Enums.CLOSE, in);
+        openIn = StringHelper.getDataHistory(Enums.OPEN, in);
+        highIn = StringHelper.getDataHistory(Enums.HIGH, in);
+        lowIn = StringHelper.getDataHistory(Enums.LOW, in);
+
+
+        // тело свечи
+        double candleBody = changeTotal(openIn, closeIn) * getDirection(openIn, close);
+        // от хай до лов (вся свеча)
+        double fromHighToLow = changeTotal(highIn, lowIn);
+        // опен хай
+        double openHigh = changeTotal(highIn, openIn);
+        // опен лов
+        double openLow = changeTotal(openIn, lowIn);
+
+        // тело свечи разница
+        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
+                * changeOfDirection(open, close, openIn, closeIn);
+        // разница от хай до лов
+        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
+                * changeOfDirection(high, low, highIn, lowIn);
+        // разница опен хай
+        double openHighPerDif = changeTotal(high, open, highIn, openIn)
+                * changeOfDirection(high, open, highIn, openIn);
+        // разница опен лов
+        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
+                * changeOfDirection(open, low, openIn, lowIn);
+        // разница объема всей свечи
+        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
+                * getDirection(volume, volumeIn);
+
+        this.volume = volumeIn;
+        this.close = closeIn;
+        this.open = openIn;
+        this.high = highIn;
+        this.low = lowIn;
+
+        return new StringBuilder()
+                .append(candleBody).append(";")
+                .append(fromHighToLow).append(";")
+                .append(openHigh).append(";")
+                .append(openLow).append(";")
+                .append(candleBodyPerDif).append(";")
+                .append(wholeCandlePerDif).append(";")
+                .append(openHighPerDif).append(";")
+                .append(openLowPerDif).append(";")
+                .append(volumePerDif).toString();
+    }
 
 
 

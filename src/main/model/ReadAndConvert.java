@@ -75,6 +75,42 @@ public class ReadAndConvert {
 
 
 
+//    // тест новой идеи
+//    private void convertHistory(ArrayList<String> in) {
+//        ArrayList<String> arrayList = new ArrayList<>(in);
+//        StringBuilder stringBuilder = new StringBuilder(arrayList.get(0));
+//        transformerHistory.startData(arrayList.get(1));
+//        arrayList.remove(1);
+//        arrayList.remove(0);
+//        ArrayList<String> strings = new ArrayList<>();
+//
+//        for (String s : arrayList) {
+//            strings.add(transformerHistory.transformHistory(s));
+//        }
+//        for (int i = 0; i < strings.size(); i++) {
+//            if (i != strings.size() - 1) {
+//                double a = Double.parseDouble(strings.get(i));
+//                double b = Double.parseDouble(strings.get(i + 1));
+//                if (a > 0 && b > 0 && a < b) strings.set(i, 0.0 + "");
+//                else if (a < 0 && b < 0 && a > b) strings.set(i, 0.0 + "");
+//            }
+//        }
+//        for (String s : strings) {
+//            stringBuilder.append(";").append(s);
+//        }
+//
+//        arrayList.clear();
+//        strings.clear();
+//        // наполняем входящий лист отконвертированными строками для обучения NN
+//        if (forTestedNN) {
+//            testerNN.addDownloadedList(stringBuilder.toString());
+//        } else {
+//            downloadedData.addDownloadedList(stringBuilder.toString());
+//        }
+//    }
+
+
+
     // находим паттерны
     private void findPatterns(ArrayList<String> in) {
         ConsoleHelper.writeMessage(StringHelper.getString(Enums.STARTING_CONVERTING_HISTORY));
