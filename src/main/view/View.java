@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+
 public class View extends Thread {
     private RunTheProgram runTheProgram;
     private JButton jButtonEducateNN;
@@ -158,17 +160,6 @@ public class View extends Thread {
                         ConsoleHelper.printInfoSettings();
                     } else if (string.trim().equalsIgnoreCase("commands")) {
                         ConsoleHelper.showCommands();
-//                    }
-//                    else if (string.trim().equalsIgnoreCase("showSteeps")) {
-//                        ConsoleHelper.writeMessage(Gasket.getMartingaleClass().showSteps());
-//                    }
-//                    else if (string.trim().equalsIgnoreCase("flag")) {
-//                        ConsoleHelper.printFlag();
-//                    } else if (string.trim().equalsIgnoreCase("price")) {
-//                        ConsoleHelper.writeMessage("price now === " + Gasket.getBitmexQuote().getBidPrice());
-//                    } else if (string.trim().equalsIgnoreCase("chart")) {
-//                        ConsoleHelper.writeMessage("chart === " + Gasket.getBitmexClient()
-//                                .getChartData(Gasket.getTicker(), 10, ChartDataBinSize.ONE_MINUTE));
                     } else {
                         Gasket.getExecutorCommandos().parseAndExecute(string.replaceAll("=", " === "));
                     }
@@ -189,7 +180,7 @@ public class View extends Thread {
 
         jFrame.setSize(1110, 635);
         jFrame.setLocation(dimension.width/2 - 570, dimension.height/2 - 325);
-        jFrame.setTitle("NN POWER by SAMUIL_OLEGOVICH");
+        jFrame.setTitle("NEURAL NETWORK FOR BTC - POWER by SAMUIL_OLEGOVICH");
 //        jFrame.setIconImage();
         return jFrame;
     }
