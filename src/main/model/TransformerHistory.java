@@ -15,8 +15,8 @@ public class TransformerHistory {
     private double highIn;
     private double lowIn;
 
-    private int numberCandle;
     private int directionCandle;
+    private int numberCandle;
 
 
 
@@ -176,21 +176,21 @@ public class TransformerHistory {
         // опен лов
         double openLow = changeTotal(openIn, lowIn);
 
-        // тело свечи разница
-        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
-                * changeOfDirection(open, close, openIn, closeIn);
-        // разница от хай до лов
-        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
-                * changeOfDirection(high, low, highIn, lowIn);
-        // разница опен хай
-        double openHighPerDif = changeTotal(high, open, highIn, openIn)
-                * changeOfDirection(high, open, highIn, openIn);
-        // разница опен лов
-        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
-                * changeOfDirection(open, low, openIn, lowIn);
-        // разница объема всей свечи
-        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
-                * getDirection(volume, volumeIn);
+//        // тело свечи разница
+//        double candleBodyPerDif = changeTotal(open, close, openIn, closeIn)
+//                * changeOfDirection(open, close, openIn, closeIn);
+//        // разница от хай до лов
+//        double wholeCandlePerDif = changeTotal(high, low, highIn, lowIn)
+//                * changeOfDirection(high, low, highIn, lowIn);
+//        // разница опен хай
+//        double openHighPerDif = changeTotal(high, open, highIn, openIn)
+//                * changeOfDirection(high, open, highIn, openIn);
+//        // разница опен лов
+//        double openLowPerDif = changeTotal(open, low, openIn, lowIn)
+//                * changeOfDirection(open, low, openIn, lowIn);
+//        // разница объема всей свечи
+//        double volumePerDif = ((1.0 / 100) * (Math.abs(volume - volumeIn) / (volume / 100.0)))
+//                * getDirection(volume, volumeIn);
 
         this.volume = volumeIn;
         this.close = closeIn;
@@ -202,18 +202,20 @@ public class TransformerHistory {
                 .append(candleBody).append(";")
                 .append(fromHighToLow).append(";")
                 .append(openHigh).append(";")
-                .append(openLow).append(";")
-                .append(candleBodyPerDif).append(";")
-                .append(wholeCandlePerDif).append(";")
-                .append(openHighPerDif).append(";")
-                .append(openLowPerDif).append(";")
-                .append(volumePerDif).toString();
+                .append(openLow)
+//                .append(";")
+//                .append(candleBodyPerDif).append(";")
+//                .append(wholeCandlePerDif).append(";")
+//                .append(openHighPerDif).append(";")
+//                .append(openLowPerDif).append(";")
+//                .append(volumePerDif)
+                .toString();
     }
 
 
 
     private double calculateCenter(double a, double b) {
-        return (a + b) / 2.0;
+        return 1 / ((a + b) / 2.0);
     }
 
     private double calculateDeviationFromCenter(double a, double b) {
@@ -230,15 +232,15 @@ public class TransformerHistory {
     }
 
     private double getDirection(double a, double b) {
-        if (a > b) return -1.0;
-        if (a < b) return 1.0;
-        return 0.0;
+        if (a > b) return 0.01;
+        if (a < b) return 0.99;
+        return 0.5;
     }
 
     private double changeOfDirection(double a, double b, double c, double d) {
-        if (Math.abs(a - b) < Math.abs(c - d)) return 1;
-        if (Math.abs(a - b) > Math.abs(c - d)) return -1;
-        return 0.0;
+        if (Math.abs(a - b) < Math.abs(c - d)) return 0.99;
+        if (Math.abs(a - b) > Math.abs(c - d)) return 0.01;
+        return 0.5;
     }
 
     private double changeTotal(double a, double b,double c,double d) {
@@ -249,7 +251,7 @@ public class TransformerHistory {
 
     private double changeTotal(double a, double b) {
 //        return (1.0 / 100) * (Math.abs(a - b) / (openIn / 100));
-        return (Math.abs(a - b) / (openIn / 100));
+        return 1 / ((Math.abs(a - b) / (openIn / 100)));
 //        return (Math.abs(a - b) / (open / 100));
     }
 
