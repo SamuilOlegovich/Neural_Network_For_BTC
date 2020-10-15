@@ -169,7 +169,6 @@ public class FilesAndPathCreator {
         }
 
         if (System.getProperty("os.name").startsWith("Windows")) {
-
             pathHistoryForFortuneteller = pathHistoryForFortuneteller
                     .replaceFirst("/", "").replaceAll("/", "\\\\");
 
@@ -208,7 +207,6 @@ public class FilesAndPathCreator {
 
 
     private void isTheFileInPlace() {
-
         if (!Files.exists(Paths.get(pathHistoryForFortuneteller))) {
             createdHistoryForFortuneteller();
         }
@@ -327,7 +325,6 @@ public class FilesAndPathCreator {
                     + "Не удалось создать Лог файл.");
         }
     }
-
 
     public String getPathSettings() {
         return pathSettings;
