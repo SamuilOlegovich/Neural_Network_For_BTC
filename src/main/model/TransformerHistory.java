@@ -21,7 +21,7 @@ public class TransformerHistory {
 
 
 
-    public void startData(String in) {
+    public synchronized void startData(String in) {
         volume = StringHelper.getDataHistory(Enums.VOLUME, in);
         close = StringHelper.getDataHistory(Enums.CLOSE, in);
         open = StringHelper.getDataHistory(Enums.OPEN, in);
